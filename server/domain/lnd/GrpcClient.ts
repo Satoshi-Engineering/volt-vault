@@ -8,10 +8,9 @@ export default class GprcClient {
 
   constructor(params: {
     server: string,
-    lndCert: Buffer, 
+    lndCert: Buffer,
     macaroon: string,
   }) {
-
     const packageDefinition = getPackageDefinition()
     const lnrpcDescriptor = grpc.loadPackageDefinition(packageDefinition)
     const lnrpc = lnrpcDescriptor.lnrpc
@@ -23,7 +22,7 @@ export default class GprcClient {
     })
 
     const sslCreds = grpc.credentials.createSsl(params.lndCert)
-    let credentials = grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds)
+    const credentials = grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds)
 
     this.client = new lnrpc.Lightning(params.server, credentials)
   }
@@ -40,7 +39,7 @@ export default class GprcClient {
             reject(parsedResponse.error)
             return
           }
-          
+
           resolve(parsedResponse.data)
         }
       })
@@ -49,13 +48,13 @@ export default class GprcClient {
 
   async queryRoutes(request: {
     pub_key: string,
-    amt_msat: number, 
+    amt_msat: number,
   }) {
     this.client.QueryRoutes(request, (err: any, response: any) => {
       if (err) {
-        console.error('Error:', err);
+        console.error('Error:', err)
       } else {
-        console.log('Routes:', JSON.stringify(response.routes, null, 2));
+        console.log('Routes:', JSON.stringify(response.routes, null, 2))
       }
     })
   }

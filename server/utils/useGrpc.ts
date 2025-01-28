@@ -11,9 +11,9 @@ export default (): GprcClient => {
 
 export const initGrpcClient = (params: {
   server: string,
-  lndCert: Buffer, 
+  lndCert: Buffer,
   macaroon: string,
 }) => {
   assert(cachedGrpcClient == null, 'GprcClient already initialized')
-  cachedGrpcClient = new GprcClient(params)  
+  cachedGrpcClient = new GprcClient(params)
 }

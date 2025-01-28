@@ -3,6 +3,6 @@ export default defineAppConfig({
     primary: 'purple',
     container: {
       constrained: 'max-w-2xl',
-    }
-  }
+    },
+  },
 })

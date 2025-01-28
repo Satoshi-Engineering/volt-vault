@@ -3,7 +3,9 @@
     <UContainer>
       <UCard>
         <template #header>
-          <div class="font-bold text-2xl">Volt Vault</div>
+          <div class="font-bold text-2xl">
+            Volt Vault
+          </div>
         </template>
 
         Volt Vault is Satoshi Engineering's internal project, focused on

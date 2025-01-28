@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import * as protoLoader from '@grpc/proto-loader'
 
 const PROTO_PATH = 'server/domain/lnd/proto'
@@ -12,7 +12,7 @@ export default () => {
     longs: String,
     enums: String,
     defaults: true,
-    oneofs: true
+    oneofs: true,
   }
 
   const packageDefinition = protoLoader.loadSync(absoluteProtoPath, loaderOptions)
