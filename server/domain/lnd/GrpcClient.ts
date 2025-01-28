@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as grpc from '@grpc/grpc-js'
 
 import getPackageDefinition from './getPackageDefinition'
