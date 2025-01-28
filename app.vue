@@ -13,7 +13,7 @@
         landscape, bridging gaps to enhance functionality and usability.
 
         <template #footer>
-          <GithubLink />
+          <TheFooter />
         </template>
       </UCard>
     </UContainer>
