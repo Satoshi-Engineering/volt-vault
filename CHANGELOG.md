@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Fix default admin macaroon path ([43985be](https://github.com/Satoshi-Engineering/volt-vault/commit/43985be))
+- Copy lightning proto into the docker image ([d4471eb](https://github.com/Satoshi-Engineering/volt-vault/commit/d4471eb))
+- Add directory path to dockerfile ([29b0e8b](https://github.com/Satoshi-Engineering/volt-vault/commit/29b0e8b))
+
+### 📖 Documentation
+
+- Add api description ([e1f5567](https://github.com/Satoshi-Engineering/volt-vault/commit/e1f5567))
+
+### 🏡 Chore
+
+- Add grpc server to config.json ([dd7f4b2](https://github.com/Satoshi-Engineering/volt-vault/commit/dd7f4b2))
+- Move the longer error message to message field ([a5556d4](https://github.com/Satoshi-Engineering/volt-vault/commit/a5556d4))
+- Make lnd routes get only ([1514b0f](https://github.com/Satoshi-Engineering/volt-vault/commit/1514b0f))
+- **footer:** Add version Badge ([40be3fb](https://github.com/Satoshi-Engineering/volt-vault/commit/40be3fb))
+- **footer:** Color adjust ([032ff1d](https://github.com/Satoshi-Engineering/volt-vault/commit/032ff1d))
+- Eslint fix ([e92f9b0](https://github.com/Satoshi-Engineering/volt-vault/commit/e92f9b0))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.2
 
 
