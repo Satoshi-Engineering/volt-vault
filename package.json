@@ -12,6 +12,7 @@
     "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
+    "@nuxt/ui": "^2.21.0",
     "nuxt": "^3.15.3",
     "vue": "latest",
     "vue-router": "latest"
