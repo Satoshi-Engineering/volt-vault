@@ -16,7 +16,8 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     throw createError({
       statusCode: 400,
-      statusMessage: `${error}\n${JSON.stringify(error)}`,
+      statusMessage: `${error}`,
+      message: `${JSON.stringify(error)}`
     })
   }
 })
