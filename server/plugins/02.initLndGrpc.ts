@@ -6,7 +6,7 @@ import { initGrpcClient } from '../utils/useGrpc'
 const LND_CERT_PATH = 'data/lnd'
 const LND_CERT_FILE = 'tls.cert'
 
-const MACAROON_CERT_PATH = 'data/lnd/chain/bitcoin/mainnet'
+const MACAROON_CERT_PATH = 'data/lnd/data/chain/bitcoin/mainnet'
 const MACAROON_CERT_FILE = 'admin.macaroon'
 
 export default defineNitroPlugin(() => {
