@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.7.5",
+    "changelogen": "^0.5.7",
     "eslint": "^9.19.0"
   }
 }
