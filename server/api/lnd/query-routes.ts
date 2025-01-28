@@ -1,11 +1,22 @@
-export default defineEventHandler(() => {
+import { z } from 'zod'
+
+const InputSchema = z.object({
+  pub_key: z.string().describe('Public key of a node'),
+  amt: z.string().describe('Amount in satoshis'),
+})
+
+export default defineEventHandler(async (event) => {
+  const query = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
-  //
-  grpcClient.queryRoutes({
-    pub_key: '02287f754427019e74b88c8f3779ce09bcf2c3eefd3e24c1eb7b011b35d9d883af',
-    amt_msat: 1000,
-  })
-  return {
-    hello: 'world',
+  try {
+    return await grpcClient.queryRoutes({
+      pub_key: query.pub_key,
+      amt: Number(query.amt),
+    })
+  } catch (error) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: `${error}\n${JSON.stringify(error)}`,
+    })    
   }
 })

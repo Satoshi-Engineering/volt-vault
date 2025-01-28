@@ -33,7 +33,6 @@ export default class GprcClient {
         if (err) {
           reject(err)
         } else {
-          console.log(response)
           const parsedResponse = GetInfoResponse.safeParse(response)
           if (!parsedResponse.success) {
             reject(parsedResponse.error)
@@ -48,14 +47,17 @@ export default class GprcClient {
 
   async queryRoutes(request: {
     pub_key: string,
-    amt_msat: number,
+    amt: number,
   }) {
-    this.client.QueryRoutes(request, (err: any, response: any) => {
-      if (err) {
-        console.error('Error:', err)
-      } else {
-        console.log('Routes:', JSON.stringify(response.routes, null, 2))
-      }
+    return new Promise((resolve, reject) => {
+      this.client.QueryRoutes(request, (err: any, response: any) => {
+        if (err) {
+          reject(err)
+        } else {
+          console.info(response)
+          resolve(response)
+        }
+      })
     })
   }
 }
