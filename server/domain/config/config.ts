@@ -3,7 +3,12 @@ import path from 'node:path'
 import { z } from 'zod'
 import consola from 'consola'
 
+export const LndSchema = z.object({
+  server: z.string(),
+})
+
 export const ConfigSchema = z.object({
+  grpc: LndSchema,
 })
 
 export type ConfigType = z.infer<typeof ConfigSchema>

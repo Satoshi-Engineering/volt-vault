@@ -12,6 +12,8 @@ const MACAROON_CERT_FILE = 'admin.macaroon'
 export default defineNitroPlugin(() => {
   consola.info('Init LND gRPC Client')
 
+  const config = useConfig()
+
   const lndCertPath = path.resolve(process.cwd(), LND_CERT_PATH, LND_CERT_FILE)
   const lndCert = fs.readFileSync(lndCertPath)
 
@@ -20,7 +22,7 @@ export default defineNitroPlugin(() => {
   const macaroon = macaroonAsBuffer.toString('hex')
 
   initGrpcClient({
-    server: 'localhost:10009',
+    server: config.grpc.server,
     lndCert,
     macaroon,
   })
