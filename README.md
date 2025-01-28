@@ -7,6 +7,14 @@
 Volt Vault is Satoshi Engineering's internal project, focused on implementing essential features missing
 in the Lightning Network landscape, bridging gaps to enhance functionality and usability.
 
+## Features
+
+- GRPC Endpoints
+  - `/api/lnd/query-routes`
+    - Request: `pub_key` and `amt`
+    - Response: [See](https://lightning.engineering/api-docs/api/lnd/lightning/query-routes/)
+  - `/api/lnd/get-info`: Partial response from [See](https://lightning.engineering/api-docs/api/lnd/lightning/get-info/)
+
 ## Infos
 
 - Using gRPC of lnd v0.18.4-beta
