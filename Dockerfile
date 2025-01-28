@@ -33,6 +33,7 @@ ENV PORT=$PORT
 
 COPY --from=build /app/.output /app/.output
 COPY package.json /app
+COPY static-data /app
 # Optional, only needed if you rely on unbundled dependencies
 # COPY --from=build /app/node_modules /app/node_modules
 

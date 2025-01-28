@@ -1,7 +1,7 @@
 import path from 'node:path'
 import * as protoLoader from '@grpc/proto-loader'
 
-const PROTO_PATH = 'server/domain/lnd/proto'
+const PROTO_PATH = 'static-data/lnd/proto'
 const PROTO_FILE = 'lightning.proto'
 
 export default () => {
