@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- Add new route that queries the routes for a given payment request ([d4b2225](https://github.com/Satoshi-Engineering/volt-vault/commit/d4b2225))
+
+### ❤️ Contributors
+
+- Dr-erych <dave@satoshiengineering.com>
+
 ## v0.0.3
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.2...v0.0.3)
