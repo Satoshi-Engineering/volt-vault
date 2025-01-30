@@ -4,6 +4,23 @@ import * as grpc from '@grpc/grpc-js'
 import getPackageDefinition from './getPackageDefinition'
 import { GetInfoResponse } from './responses/GetInfoResponse'
 
+export type PayReq = {
+  destination: string,
+  payment_hash: string,
+  num_satoshis: string,
+  timestamp: string,
+  expiry: string,
+  description: string,
+  description_hash: string,
+  fallback_addr: string,
+  cltv_expiry: string,
+  route_hints: any[],
+  payment_addr: Buffer,
+  num_msat: string,
+  features: any[],
+  blinded_path: any[],
+}
+
 export default class GprcClient {
   client: any
 
@@ -49,9 +66,25 @@ export default class GprcClient {
   async queryRoutes(request: {
     pub_key: string,
     amt: number,
+    route_hints?: any[],
   }) {
     return new Promise((resolve, reject) => {
       this.client.QueryRoutes(request, (err: any, response: any) => {
+        if (err) {
+          reject(err)
+        } else {
+          console.info(response)
+          resolve(response)
+        }
+      })
+    })
+  }
+
+  async decodePayReq(request: {
+    pay_req: string,
+  }): Promise<PayReq> {
+    return new Promise((resolve, reject) => {
+      this.client.DecodePayReq(request, (err: any, response: PayReq) => {
         if (err) {
           reject(err)
         } else {
