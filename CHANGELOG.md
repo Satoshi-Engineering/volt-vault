@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.4...v0.0.5)
+
+### 💅 Refactors
+
+- Return the decoded payReq alongside the queryRoutesResponse ([71b5996](https://github.com/Satoshi-Engineering/volt-vault/commit/71b5996))
+
+### ❤️ Contributors
+
+- Dr-erych <dave@satoshiengineering.com>
+
 ## v0.0.4
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.3...v0.0.4)
