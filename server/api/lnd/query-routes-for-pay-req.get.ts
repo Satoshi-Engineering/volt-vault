@@ -8,14 +8,18 @@ export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
   try {
-    const { destination, num_satoshis, route_hints } = await grpcClient.decodePayReq({
+    const payReq = await grpcClient.decodePayReq({
       pay_req: query.pay_req,
     })
-    return await grpcClient.queryRoutes({
-      pub_key: destination,
-      amt: Number(num_satoshis),
-      route_hints,
+    const queryRoutesResponse = await grpcClient.queryRoutes({
+      pub_key: payReq.destination,
+      amt: Number(payReq.num_satoshis),
+      route_hints: payReq.route_hints,
     })
+    return {
+      payReq,
+      queryRoutesResponse,
+    }
   } catch (error) {
     throw createError({
       statusCode: 400,
