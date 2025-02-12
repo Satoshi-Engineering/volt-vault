@@ -59,6 +59,16 @@ nano walletpassword
 # enter the same wallet unlock password
 ```
 
+## Create config file `./config.json`
+
+```json
+{
+  "grpc": {
+    "server": "localhost:10009"
+  }
+}
+```
+
 ## Run from source
 
 ```bash
