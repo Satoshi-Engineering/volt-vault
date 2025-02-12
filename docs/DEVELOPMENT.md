@@ -1,5 +1,13 @@
 # Development
 
+## Prerequisites
+
+- nodejs 22 LTS
+- npm
+- docker (recommended for lightning node setup, see below)
+
+## Install
+
 ```bash
 npm i
 ```
@@ -10,17 +18,6 @@ npm i
     - Copy the admin.macaroon from the lnd node to `./data/lnd/data/chain/bitcoin/mainnet/admin.macaroon`
     - Copy the tls.cert from the lnd node to `./data/tls.cert`
   - or mount the lnd data director to `./data/lnd` with the compose file
-
-```bash
-npm run dev
-```
-
-## Proto
-
-Currently working with proto of lnd v0.18.4-beta
-
-- https://github.com/lightningnetwork/lnd/blob/v0.18.4-beta/lnrpc/lightning.proto
-- Permalink to Proto File: https://github.com/lightningnetwork/lnd/blob/ddeb8351684a611f6c27f16f09be75d5c039f08c/lnrpc/lightning.proto
 
 ## Setup Dev LND node
 
@@ -61,3 +58,18 @@ docker exec -it lnd-testnet lncli create
 nano walletpassword
 # enter the same wallet unlock password
 ```
+
+## Run from source
+
+```bash
+npm run dev
+```
+
+## Dev Notes
+
+### Proto
+
+Currently working with proto of lnd v0.18.4-beta
+
+- https://github.com/lightningnetwork/lnd/blob/v0.18.4-beta/lnrpc/lightning.proto
+- Permalink to Proto File: https://github.com/lightningnetwork/lnd/blob/ddeb8351684a611f6c27f16f09be75d5c039f08c/lnrpc/lightning.proto
