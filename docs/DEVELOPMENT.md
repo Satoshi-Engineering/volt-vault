@@ -2,7 +2,16 @@
 
 ```bash
 npm i
-# Setup Dev LND node --> see chapter below
+```
+
+- Setup Dev LND node --> see chapter below
+- Give access to the admin.macaroon and tls.cert
+  - Either copy the filex
+    - Copy the admin.macaroon from the lnd node to `./data/lnd/data/chain/bitcoin/mainnet/admin.macaroon`
+    - Copy the tls.cert from the lnd node to `./data/tls.cert`
+  - or mount the lnd data director to `./data/lnd` with the compose file
+
+```bash
 npm run dev
 ```
 
