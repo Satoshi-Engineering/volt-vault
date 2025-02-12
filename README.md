@@ -24,6 +24,10 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
 - QueryRoutes API
 - Channel Checker
 
+## Development
+
+See [DEVELOPMENT](docs/DEVELOPMENT.md)
+
 ## Tip us
 
 If you like this project, please adapt the landingpage to your local stores, that

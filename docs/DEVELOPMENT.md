@@ -1,5 +1,11 @@
 # Development
 
+```bash
+npm i
+# Setup Dev LND node --> see chapter below
+npm run dev
+```
+
 ## Proto
 
 Currently working with proto of lnd v0.18.4-beta
