@@ -1,6 +1,42 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- Add types for proto generated grpc files ([6720dc6](https://github.com/Satoshi-Engineering/volt-vault/commit/6720dc6))
+- Add types for proto generated grpc files ([3774f80](https://github.com/Satoshi-Engineering/volt-vault/commit/3774f80))
+
+### 🩹 Fixes
+
+- Eslint ignore auto generated files ([201f8d0](https://github.com/Satoshi-Engineering/volt-vault/commit/201f8d0))
+- Get info response import typo ([4a8fab3](https://github.com/Satoshi-Engineering/volt-vault/commit/4a8fab3))
+
+### 💅 Refactors
+
+- Query-routes expect paymentRequest in payload and deprecate query-routes-for-pay-req in favor of query-routes ([9fc7e52](https://github.com/Satoshi-Engineering/volt-vault/commit/9fc7e52))
+- Get-info api filter response to only expose defined data ([60681f4](https://github.com/Satoshi-Engineering/volt-vault/commit/60681f4))
+
+### 📖 Documentation
+
+- **development:** Add link to readme and update minimalistic infos ([f41e0e2](https://github.com/Satoshi-Engineering/volt-vault/commit/f41e0e2))
+- **development:** Add descript of lnd credentials ([3ae6b88](https://github.com/Satoshi-Engineering/volt-vault/commit/3ae6b88))
+- **development:** Restructer development readme ([bb921e9](https://github.com/Satoshi-Engineering/volt-vault/commit/bb921e9))
+- **development:** Add config.json example ([995aef8](https://github.com/Satoshi-Engineering/volt-vault/commit/995aef8))
+
+### 🏡 Chore
+
+- Add sample config file and make telegramSender parameters nullish ([e6a9af0](https://github.com/Satoshi-Engineering/volt-vault/commit/e6a9af0))
+
+### ❤️ Contributors
+
+- Thomas Schagerl <tom@satoshiengineering.com>
+- Dr-erych <dave@satoshiengineering.com>
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.5
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.4...v0.0.5)
