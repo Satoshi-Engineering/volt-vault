@@ -1,0 +1,15 @@
+{
+  "grpc": {
+    "server": "lnd:10009",
+    "lndCertDir": "data/lnd",
+    "lndCertFile": "tls.cert",
+    "macaroonCertDir": "data/lnd/data/chain/bitcoin/mainnnet",
+    "macaroonCertFile": "admin.macaroon"
+  },
+  "telegramSender": {
+    "token": null,
+    "defaultChatId": null,
+    "messagePrefix": "Volt Vault Errors",
+    "messageMaxLength": 500
+  }
+}

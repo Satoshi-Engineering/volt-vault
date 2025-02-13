@@ -12,10 +12,10 @@ export const LndSchema = z.object({
 })
 
 export const TelegramSenderSchema = z.object({
-  token: z.string().optional(),
-  defaultChatId: z.string().optional(),
-  messagePrefix: z.string().optional(),
-  messageMaxLength: z.number().optional(),
+  token: z.string().nullish(),
+  defaultChatId: z.string().nullish(),
+  messagePrefix: z.string().nullish(),
+  messageMaxLength: z.number().nullish(),
 })
 
 export const ConfigSchema = z.object({

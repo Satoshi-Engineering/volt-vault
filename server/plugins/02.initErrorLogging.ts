@@ -18,7 +18,9 @@ const initErrorLogging = () => {
 const initTelegramSender = () => {
   if (
     typeof config.telegramSender?.token !== 'string'
+    || config.telegramSender.token.length === 0
     || typeof config.telegramSender?.defaultChatId !== 'string'
+    || config.telegramSender.defaultChatId.length === 0
   ) {
     console.warn('token or defaultChatId are not set in config.json\nWill not send error messages to Telegram.')
     return null
@@ -27,8 +29,8 @@ const initTelegramSender = () => {
   return new TelegramSender({
     token: config.telegramSender.token,
     defaultChatId: config.telegramSender.defaultChatId,
-    messagePrefix: config.telegramSender.messagePrefix,
-    messageMaxLength: config.telegramSender.messageMaxLength,
+    messagePrefix: config.telegramSender.messagePrefix ?? undefined,
+    messageMaxLength: config.telegramSender.messageMaxLength ?? 4000,
   })
 }
 
