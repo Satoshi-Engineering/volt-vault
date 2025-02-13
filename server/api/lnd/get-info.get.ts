@@ -1,4 +1,4 @@
-import { GetInfoResponse } from '~/server/domain/lnd/responses/GetInfoResponse'
+import { GetInfoResponse } from '~/server/api/lnd/responses/GetInfoResponse'
 
 export default defineEventHandler(async () => {
   const grpcClient = useGrpc()
