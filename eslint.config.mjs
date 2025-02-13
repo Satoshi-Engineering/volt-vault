@@ -14,6 +14,8 @@ export default createConfigForNuxt({
       './playground',
     ],
   },
+}, {
+  ignores: ['server/domain/lnd/types/**/*.ts'],
 })
   .append({
     rules: {
@@ -23,5 +25,4 @@ export default createConfigForNuxt({
       'vue/multi-word-component-names': 'off',
       'vue/block-tag-newline': 'off',
     },
-  },
-  )
+  })
