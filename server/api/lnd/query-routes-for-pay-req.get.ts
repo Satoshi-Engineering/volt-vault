@@ -4,13 +4,15 @@ const InputSchema = z.object({
   pay_req: z.string().describe('Payment request string'),
 })
 
+/**
+ * @deprecated use query-routes instead
+ */
 export default defineEventHandler(async (event) => {
-  const query = await getValidatedQuery(event, InputSchema.parse)
+  const { pay_req } = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
+
   try {
-    const payReq = await grpcClient.decodePayReq({
-      pay_req: query.pay_req,
-    })
+    const payReq = await grpcClient.decodePaymentRequest({ pay_req })
     const queryRoutesResponse = await grpcClient.queryRoutes({
       pub_key: payReq.destination,
       amt: Number(payReq.num_satoshis),

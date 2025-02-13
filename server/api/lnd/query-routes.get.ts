@@ -1,18 +1,26 @@
 import { z } from 'zod'
 
 const InputSchema = z.object({
-  pub_key: z.string().describe('Public key of a node'),
-  amt: z.string().describe('Amount in satoshis'),
+  paymentRequestEncoded: z.string().describe('Payment request string'),
 })
 
 export default defineEventHandler(async (event) => {
-  const query = await getValidatedQuery(event, InputSchema.parse)
+  const { paymentRequestEncoded } = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
+
   try {
-    return await grpcClient.queryRoutes({
-      pub_key: query.pub_key,
-      amt: Number(query.amt),
+    const paymentRequestDecoded = await grpcClient.decodePaymentRequest({
+      pay_req: paymentRequestEncoded,
     })
+    const queryRoutesResponse = await grpcClient.queryRoutes({
+      pub_key: paymentRequestDecoded.destination,
+      amt: Number(paymentRequestDecoded.num_satoshis),
+      route_hints: paymentRequestDecoded.route_hints,
+    })
+    return {
+      paymentRequestDecoded,
+      queryRoutesResponse,
+    }
   } catch (error) {
     throw createError({
       statusCode: 400,
