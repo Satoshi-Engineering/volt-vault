@@ -1,28 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as grpc from '@grpc/grpc-js'
 
+import type { GetInfoResponse__Output as GetInfoResponse } from './types/lnrpc/GetInfoResponse'
+import type { LightningClient } from './types/lnrpc/Lightning'
+import type { PayReq__Output as PayReq } from './types/lnrpc/PayReq'
+import type { QueryRoutesResponse__Output as QueryRoutesResponse } from './types/lnrpc/QueryRoutesResponse'
+import type { RouteHint__Output as RouteHint } from './types/lnrpc/RouteHint'
+import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
-import { GetInfoResponse } from './responses/GetInfoResponse'
-
-export type PayReq = {
-  destination: string,
-  payment_hash: string,
-  num_satoshis: string,
-  timestamp: string,
-  expiry: string,
-  description: string,
-  description_hash: string,
-  fallback_addr: string,
-  cltv_expiry: string,
-  route_hints: any[],
-  payment_addr: Buffer,
-  num_msat: string,
-  features: any[],
-  blinded_path: any[],
-}
 
 export default class GprcClient {
-  client: any
+  client: LightningClient
 
   constructor(params: {
     server: string,
@@ -30,7 +17,7 @@ export default class GprcClient {
     macaroon: string,
   }) {
     const packageDefinition = getPackageDefinition()
-    const lnrpcDescriptor = grpc.loadPackageDefinition(packageDefinition)
+    const lnrpcDescriptor = grpc.loadPackageDefinition(packageDefinition) as unknown as ProtoGrpcType
     const lnrpc = lnrpcDescriptor.lnrpc
 
     const metadata = new grpc.Metadata()
@@ -47,17 +34,12 @@ export default class GprcClient {
 
   async getInfo(): Promise<GetInfoResponse> {
     return new Promise((resolve, reject) => {
-      this.client.getInfo({}, (err: any, response: any) => {
-        if (err) {
+      this.client.GetInfo({}, (err: unknown, response?: GetInfoResponse) => {
+        if (err || !response) {
           reject(err)
         } else {
-          const parsedResponse = GetInfoResponse.safeParse(response)
-          if (!parsedResponse.success) {
-            reject(parsedResponse.error)
-            return
-          }
-
-          resolve(parsedResponse.data)
+          console.info(response)
+          resolve(response)
         }
       })
     })
@@ -66,11 +48,11 @@ export default class GprcClient {
   async queryRoutes(request: {
     pub_key: string,
     amt: number,
-    route_hints?: any[],
-  }) {
+    route_hints?: RouteHint[],
+  }): Promise<QueryRoutesResponse> {
     return new Promise((resolve, reject) => {
-      this.client.QueryRoutes(request, (err: any, response: any) => {
-        if (err) {
+      this.client.QueryRoutes(request, (err: unknown, response?: QueryRoutesResponse) => {
+        if (err || !response) {
           reject(err)
         } else {
           console.info(response)
@@ -84,8 +66,8 @@ export default class GprcClient {
     pay_req: string,
   }): Promise<PayReq> {
     return new Promise((resolve, reject) => {
-      this.client.DecodePayReq(request, (err: any, response: PayReq) => {
-        if (err) {
+      this.client.DecodePayReq(request, (err: unknown, response?: PayReq) => {
+        if (err || !response) {
           reject(err)
         } else {
           console.info(response)
