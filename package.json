@@ -17,7 +17,9 @@
     "@grpc/grpc-js": "^1.12.5",
     "@grpc/proto-loader": "^0.7.13",
     "@nuxt/ui": "^2.21.0",
+    "console-hooks": "^1.0.2",
     "nuxt": "^3.15.3",
+    "telegram-sender": "^1.0.4",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.1"
