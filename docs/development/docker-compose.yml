@@ -1,0 +1,38 @@
+services:
+  bitcoin_regtest:
+    image: boltz/bitcoin-core:28.1
+    container_name: bitcoin_regtest
+    platform: linux/amd64  # Force x86_64 emulation for ARM systems
+    restart: unless-stopped
+    ports:
+      - "18443:18443"
+      - "18444:18444"
+    volumes:
+      - ./bitcoin.conf:/root/.bitcoin/bitcoin.conf:ro
+      - ../../data/bitcoin:/root/.bitcoin
+
+  lnd:
+    image: lightninglabs/lnd:v0.18.5-beta  # Using specific LND version
+    container_name: lnd
+    platform: linux/amd64  # Force x86_64 emulation for ARM systems
+    restart: unless-stopped
+    depends_on:
+      - bitcoin_regtest
+    ports:
+      - "10009:10009"
+      - "8080:8080"
+      - "9735:9735"
+    volumes:
+      - ../../data/lnd:/root/.lnd
+      - ./lnd.conf:/root/.lnd/lnd.conf:ro
+
+  lnd_other_node:
+    image: lightninglabs/lnd:v0.18.5-beta  # Using specific LND version
+    container_name: lnd_other_node
+    platform: linux/amd64  # Force x86_64 emulation for ARM systems
+    restart: unless-stopped
+    depends_on:
+      - bitcoin_regtest
+    volumes:
+      - ../../data/lnd-other-node:/root/.lnd
+      - ./lnd-other-node.conf:/root/.lnd/lnd.conf:ro
