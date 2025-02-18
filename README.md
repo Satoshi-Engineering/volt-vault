@@ -18,7 +18,10 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
 
 ## Infos
 
-- Using gRPC of lnd v0.18.4-beta
+Currently working with proto of `LND v0.18.5-beta`.
+
+- [Proto File](https://github.com/lightningnetwork/lnd/blob/v0.18.5-beta/lnrpc/lightning.proto)
+- [Permalink](https://github.com/lightningnetwork/lnd/blob/4ccf4fc24c750d098cf24566ef4bbc0311c7d476/lnrpc/lightning.proto)
 
 ## Roadmap
 

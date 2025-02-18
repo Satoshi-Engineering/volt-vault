@@ -15,6 +15,7 @@ export interface PolicyUpdateRequest {
   'min_htlc_msat_specified'?: (boolean);
   'fee_rate_ppm'?: (number);
   'inbound_fee'?: (_lnrpc_InboundFee | null);
+  'create_missing_edge'?: (boolean);
   'scope'?: "global"|"chan_point";
 }
 
@@ -29,5 +30,6 @@ export interface PolicyUpdateRequest__Output {
   'min_htlc_msat_specified': (boolean);
   'fee_rate_ppm': (number);
   'inbound_fee': (_lnrpc_InboundFee__Output | null);
+  'create_missing_edge': (boolean);
   'scope': "global"|"chan_point";
 }
