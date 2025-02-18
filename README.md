@@ -10,10 +10,11 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
 ## Features
 
 - GRPC Endpoints
+  - `/api/lnd/get-info`: Partial response from [See](https://lightning.engineering/api-docs/api/lnd/lightning/get-info/)
+- QueryRoutes API
   - `/api/lnd/query-routes`
     - Request: `pub_key` and `amt`
     - Response: [See](https://lightning.engineering/api-docs/api/lnd/lightning/query-routes/)
-  - `/api/lnd/get-info`: Partial response from [See](https://lightning.engineering/api-docs/api/lnd/lightning/get-info/)
 
 ## Infos
 
@@ -21,8 +22,8 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
 
 ## Roadmap
 
-- QueryRoutes API
 - Channel Checker
+- Move Funds to Hardware Wallet as "Order"
 
 ## Development
 
