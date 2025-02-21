@@ -10,10 +10,14 @@ const packageJsonTyped = packageJson as {
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
+    '@nuxt/test-utils/module',
   ],
   devtools: {
     enabled: true,
   },
+  css: [
+    '~/assets/css/main.css',
+  ],
   runtimeConfig: {
     public: {
       releasedVersion: packageJsonTyped.version,
