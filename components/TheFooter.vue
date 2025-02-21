@@ -1,11 +1,7 @@
 <template>
-  <div class="flex justify-end item-center">
+  <div class="flex justify-end items-center">
     <GithubLink />
-    <UDivider
-      orientation="vertical"
-      :ui="{ border: { base: 'border-gray-400' } }"
-      class="h-7 mt-1"
-    />
+    <div class="h-8 border-l-2 border-l-gray-200" />
     <VersionBadge />
   </div>
 </template>
