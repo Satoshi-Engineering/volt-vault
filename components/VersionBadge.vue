@@ -8,6 +8,7 @@
     <UBadge
       :ui="{ rounded: 'rounded-full' }"
       class="px-2"
+      data-testid="version"
     >
       {{ version }}
     </UBadge>
