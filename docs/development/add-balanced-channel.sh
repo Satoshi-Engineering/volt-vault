@@ -6,6 +6,18 @@ BITCOIN_CLI="docker exec bitcoin_regtest bitcoin-cli -regtest"
 LND_CLI="docker exec lnd lncli --network=regtest"
 LND_OTHER_CLI="docker exec lnd_other_node lncli --network=regtest"
 
+# Step 0: Wait for LND to be ready
+wait_for_lnd() {
+    echo "⏳ Waiting for LND to be ready..."
+    while ! $LND_CLI getinfo &>/dev/null; do
+        echo "🔄 LND not ready yet, retrying in 0.25 seconds..."
+        sleep 0.25
+    done
+    echo "✅ LND is ready!"
+}
+
+wait_for_lnd
+
 # Step 1: Generate new address and mine 2 blocks to generate funds
 echo "💰 Getting new LND addresses..."
 LND_ADDRESS=$($LND_CLI newaddress p2wkh | jq -r '.address')
