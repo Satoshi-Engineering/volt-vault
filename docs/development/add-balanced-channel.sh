@@ -22,11 +22,15 @@ wait_for_lnd
 echo "💰 Getting new LND addresses..."
 LND_ADDRESS=$($LND_CLI newaddress p2wkh | jq -r '.address')
 LND_OTHER_NODE_ADDRESS=$($LND_OTHER_CLI newaddress p2wkh | jq -r '.address')
+LND_OTHER_NODE_MINING_ADDRESS=$($LND_OTHER_CLI newaddress p2wkh | jq -r '.address')
 
-echo "🔨 Mining 2 blocks"
+
+echo "🔨 Mining 2 blocks to LND"
 $BITCOIN_CLI generatetoaddress 2 "${LND_ADDRESS}"
+echo "🔨 Mining 2 blocks to LND OTHER NODE"
+$BITCOIN_CLI generatetoaddress 2 "${LND_OTHER_NODE_ADDRESS}"
 echo "🔨 Mining 101 blocks to make balance spendable"
-$BITCOIN_CLI generatetoaddress 101 "${LND_OTHER_NODE_ADDRESS}"
+$BITCOIN_CLI generatetoaddress 101 "${LND_OTHER_NODE_MINING_ADDRESS}"
 sleep 1
 
 # Step 2: Connect LND to LND_OTHER_NODE
@@ -45,7 +49,7 @@ fi
 echo "🚀 Opening channel with 0.15 BTC from LND to LND_OTHER_NODE..."
 CURRENT_CHANNEL_COUNT=$($LND_CLI listchannels | jq '.channels | length')
 $LND_CLI openchannel --node_key "$LND_OTHER_PUBKEY" --local_amt 15000000
-$BITCOIN_CLI generatetoaddress 20 "${LND_OTHER_NODE_ADDRESS}"  # Confirm channel
+$BITCOIN_CLI generatetoaddress 20 "${LND_OTHER_NODE_MINING_ADDRESS}"  # Confirm channel
 
 # Step 5: Wait for LND to recognize the channel (max 5 sec, check every 250ms)
 echo "⏳ Waiting for LND to recognize the channel..."
