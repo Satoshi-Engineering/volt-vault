@@ -60,7 +60,7 @@ TIMEOUT=5
 INTERVAL=0.25
 ELAPSED=0
 
-while [ $ELAPSED -lt $TIMEOUT ]; do
+while (( $(echo "$ELAPSED < $TIMEOUT" | bc -l) )); do
     NEW_CHANNEL_COUNT=$($LND_CLI listchannels | jq '.channels | length')
     
     if [ "$NEW_CHANNEL_COUNT" -gt "$CURRENT_CHANNEL_COUNT" ]; then
@@ -81,10 +81,10 @@ fi
 TIMEOUT=5
 INTERVAL=0.25
 ELAPSED=0
-while [ $ELAPSED -lt $TIMEOUT ]; do
-    QUERY_ROUTES_SUCCESS=$($LND_CLI queryroutes $LND_OTHER_PUBKEY $BALANCE_AMOUNT | jq '.channels | length')
+while (( $(echo "$ELAPSED < $TIMEOUT" | bc -l) )); do
+    QUERY_ROUTES_SUCCESS=$($LND_CLI queryroutes $LND_OTHER_PUBKEY $BALANCE_AMOUNT | jq '.success_prob')
     
-    if [ "$QUERY_ROUTES_SUCCESS" -eq 1]; then
+    if [[ "$QUERY_ROUTES_SUCCESS" =~ ^[0-9]+$ && "$QUERY_ROUTES_SUCCESS" -eq 1 ]]; then
         echo "✅ Query Route probe success"
         break
     fi
@@ -93,7 +93,7 @@ while [ $ELAPSED -lt $TIMEOUT ]; do
     ELAPSED=$(echo "$ELAPSED + $INTERVAL" | bc)
 done
 
-if [ "$QUERY_ROUTES_SUCCESS" -ne "$CURRENT_CHANNEL_COUNT" ]; then
+if [[ ! "$QUERY_ROUTES_SUCCESS" =~ ^[0-9]+$ || "$QUERY_ROUTES_SUCCESS" -ne 1 ]]; then
     echo "❌ Timeout: Query Route probe did not succeded within $TIMEOUT seconds."
     exit 1
 fi
