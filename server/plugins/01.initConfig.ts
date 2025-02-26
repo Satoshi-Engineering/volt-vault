@@ -1,6 +1,7 @@
 import consola from 'consola'
 
 export default defineNitroPlugin(() => {
-  consola.info('Init Config')
+  const runtimeConfig = useRuntimeConfig()
+  consola.info(`Init Config from file: ${runtimeConfig.configFile}`)
   useConfig()
 })

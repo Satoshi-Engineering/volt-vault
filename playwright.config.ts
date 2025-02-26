@@ -17,7 +17,7 @@ const devicesToTest = [
 /* See https://playwright.dev/docs/test-configuration. */
 export default defineConfig({
   webServer: {
-    command: 'npm run dev',
+    command: 'export NUXT_CONFIG_FILE=config.e2e.json; npm run build; node .output/server/index.mjs',
     url: 'http://localhost:3000',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

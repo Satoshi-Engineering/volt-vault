@@ -10,7 +10,10 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint . --max-warnings=0",
-    "test": "nuxt test",
+    "test": "npm run test:units && npm run test:e2e",
+    "test:units": "nuxt test",
+    "test:e2e": "npx playwright test",
+    "test:e2e-dev": "npx playwright test --ui",
     "bump-patch": "npm run lint && npx changelogen@latest --release && git push --follow-tags",
     "build-grpc-types": "proto-loader-gen-types --keepCase --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=server/domain/lnd/types static-data/lnd/proto/lightning.proto"
   },

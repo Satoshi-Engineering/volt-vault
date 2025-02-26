@@ -24,6 +24,7 @@ export default defineNuxtConfig({
       version: packageJsonTyped.meta?.['special-version'] || packageJsonTyped.version,
       githubLink: packageJsonTyped.homepage,
     },
+    configFile: 'config.json',
   },
   compatibilityDate: '2024-11-01',
 })

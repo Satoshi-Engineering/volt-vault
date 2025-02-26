@@ -1,0 +1,6 @@
+{
+  "grpc": {
+    "server": "localhost:10009",
+    "macaroonCertDir": "data/lnd/data/chain/bitcoin/regtest"
+  }
+}

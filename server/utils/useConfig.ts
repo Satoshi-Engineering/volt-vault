@@ -4,7 +4,8 @@ let configCache: ConfigType | null = null
 
 export const useConfig = (): ConfigType => {
   if (!configCache) {
-    configCache = parseConfig()
+    const runtimeConfig = useRuntimeConfig()
+    configCache = parseConfig(runtimeConfig.configFile)
   }
 
   return configCache
