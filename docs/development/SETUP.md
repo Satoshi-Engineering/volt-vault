@@ -57,6 +57,16 @@ npm run dev
 
 ## Development Notes
 
+If you stop and start the services or down/up the compose file, it is possible, that the lnd nodes get stuck due the bitcoin node is not proactive. Try:
+
+- Genereate some block:
+
+  ```bash
+  LND_OTHER_NODE_ADDRESS=$(docker exec lnd_other_node lncli --network=regtest newaddress p2wkh | jq -r '.address'); docker exec bitcoin_regtest bitcoin-cli -regtest generatetoaddress 101 "${LND_OTHER_NODE_ADDRESS}"
+  ```
+
+- Run the `add-balanced-channel.sh` script
+
 ### LND Node Bash Examples
 
 ```bash
@@ -65,4 +75,7 @@ docker exec lnd_other_node lncli --network=regtest addinvoice --amt 2000
 
 # Pay the invoice 
 docker exec lnd lncli --network=regtest payinvoice --force "payment_request"
+
+# Connect the nodes
+LND_OTHER_PUBKEY=$(docker exec lnd_other_node lncli --network=regtest getinfo | jq -r '.identity_pubkey');docker exec lnd lncli --network=regtest connect $LND_OTHER_PUBKEY@lnd_other_node:9735
 ```
