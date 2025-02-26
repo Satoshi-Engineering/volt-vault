@@ -17,7 +17,6 @@ test.describe('api/lnd/query-routes route', async () => {
     const queryRoutesResponse = await request.get(`/api/lnd/query-routes?=paymentRequestEncoded=${paymentRequestEncoded}`)
     expect(queryRoutesResponse.ok()).toBeTruthy()
     const queryRoutesData = await queryRoutesResponse.json()
-    console.info(queryRoutesData)
 
     testSchema(queryRoutesData)
     expect(queryRoutesData.paymentRequestDecoded.num_satoshis).toEqual(`${SATS_AMOUNT}`)
