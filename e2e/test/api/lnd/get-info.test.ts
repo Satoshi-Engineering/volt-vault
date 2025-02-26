@@ -2,7 +2,6 @@ import * as path from 'node:path'
 import * as fs from 'node:fs'
 import assert from 'node:assert'
 import { expect, test } from '@playwright/test'
-import { GetInfoResponse } from '~/server/api/lnd/responses/GetInfoResponse'
 import type { Serializable } from 'playwright-core/types/structs'
 
 const LND_CONF_FILE = 'docs/development/lnd.conf'
