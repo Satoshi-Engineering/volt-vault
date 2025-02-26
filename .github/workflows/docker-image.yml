@@ -33,7 +33,7 @@ jobs:
         run: chmod +x add-balanced-channel.sh && ./add-balanced-channel.sh
 
       - name: Fix LND file permissions
-        run: sudo chmod -R 777 ./data/lnd/data/chain/bitcoin/regtest
+        run: sudo chmod -R 755 ./data
 
       - name: Debug LND file ownership
         run: ls -lah ./
