@@ -13,6 +13,11 @@ test.describe('api/lnd/query-routes route', async () => {
     })
   })
 
+  test('should fail due validation error', async ({ request }) => {
+    const queryRoutesResponse = await request.get('/api/lnd/query-routes')
+    expect(queryRoutesResponse.status()).toBe(400)
+  })
+
   test('Getting fee for payment', async ({ request }) => {
     const queryRoutesResponse = await request.get(`/api/lnd/query-routes?=paymentRequestEncoded=${paymentRequestEncoded}`)
     expect(queryRoutesResponse.ok()).toBeTruthy()
