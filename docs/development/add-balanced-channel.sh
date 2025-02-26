@@ -74,6 +74,8 @@ if [ "$NEW_CHANNEL_COUNT" -le "$CURRENT_CHANNEL_COUNT" ]; then
     exit 1
 fi
 
+$LND_CLI listchannels
+
 # Step 6: Generate and pay an invoice for 0.05 BTC
 echo "📜 Generating invoice from LND_OTHER_NODE..."
 INVOICE=$($LND_OTHER_CLI addinvoice --amt 5000000 | jq -r '.payment_request')
