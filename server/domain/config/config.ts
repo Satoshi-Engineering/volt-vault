@@ -25,8 +25,8 @@ export const ConfigSchema = z.object({
 
 export type ConfigType = z.infer<typeof ConfigSchema>
 
-export const parseConfig = () => {
-  const configFilePath = path.resolve(process.cwd(), 'config.json')
+export const parseConfig = (relativeFilePath = 'config.json') => {
+  const configFilePath = path.resolve(process.cwd(), relativeFilePath)
 
   try {
     const configData = JSON.parse(fs.readFileSync(configFilePath, 'utf-8'))
@@ -34,6 +34,6 @@ export const parseConfig = () => {
   } catch (error) {
     consola.warn('Invalid configuration:', error)
     consola.info('Using default configuration')
-    return ConfigSchema.parse({})
+    throw error
   }
 }
