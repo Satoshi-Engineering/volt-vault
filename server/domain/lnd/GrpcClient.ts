@@ -60,7 +60,6 @@ export default class GprcClient {
         if (error || !response) {
           reject(error)
         } else {
-          console.info(response)
           resolve(response)
         }
       })
