@@ -30,7 +30,17 @@ jobs:
 
       - name: Add a balanced channel to the environment
         working-directory: ./docs/development
-        run: chmod +x add-balanced-channel.sh && ./add-balanced-channel.sh        
+        run: chmod +x add-balanced-channel.sh && ./add-balanced-channel.sh
+
+      - name: Debug LND file ownership
+        run: ls -lah ./data/lnd/data/chain/bitcoin/regtest
+      - name: Debug LND file ownership
+        run: ls -lah ./
+      - name: Debug LND file ownership
+        run: ls -lah ./data
+
+      - name: Fix LND file permissions
+        run: sudo chmod -R 777 ./data/lnd/data/chain/bitcoin/regtest
 
       - name: Run Playwright tests
         run: npx playwright test
