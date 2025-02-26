@@ -57,6 +57,8 @@ npm run dev
 
 ## Development Notes
 
+### LND Hints
+
 If you stop and start the services or down/up the compose file, it is possible, that the lnd nodes get stuck due the bitcoin node is not proactive. Try:
 
 - Genereate some block:
@@ -66,6 +68,10 @@ If you stop and start the services or down/up the compose file, it is possible, 
   ```
 
 - Run the `add-balanced-channel.sh` script
+
+### Unit Test Hints
+
+- To develop a unit test you can start a watch like this: `npm run test -- --cwd=PATH/TO/FILES --watch`
 
 ### LND Node Bash Examples
 
