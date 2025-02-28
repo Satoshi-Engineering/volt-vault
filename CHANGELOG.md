@@ -1,6 +1,91 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.6...v0.0.7)
+
+### 🚀 Enhancements
+
+- **protobuf:** Update protobuf defintions to LND v0.18.5-beta ([b1fb4c9](https://github.com/Satoshi-Engineering/volt-vault/commit/b1fb4c9))
+
+### 🩹 Fixes
+
+- **ci:** Add a wait lnd to be ready step in balanced channel script ([3e15e70](https://github.com/Satoshi-Engineering/volt-vault/commit/3e15e70))
+- **ci:** Add mine blocks to another address to make sure the lnd other address has mined & usable BTC ([6b0014e](https://github.com/Satoshi-Engineering/volt-vault/commit/6b0014e))
+- **ci:** Add wait for query routes to success in add balance script ([276fd16](https://github.com/Satoshi-Engineering/volt-vault/commit/276fd16))
+- **ci:** Queryroutes has to be 1 (integer) in balance script ([3345711](https://github.com/Satoshi-Engineering/volt-vault/commit/3345711))
+- **ci:** Fix lnd mounted directory ownership ([cf5147c](https://github.com/Satoshi-Engineering/volt-vault/commit/cf5147c))
+- **ci:** Move chmod before ls ([cfcfec6](https://github.com/Satoshi-Engineering/volt-vault/commit/cfcfec6))
+- **ci:** Change file permission starting with ./data recursively ([ba3f078](https://github.com/Satoshi-Engineering/volt-vault/commit/ba3f078))
+- **ci:** Change file permission starting with ./data recursively ([291f409](https://github.com/Satoshi-Engineering/volt-vault/commit/291f409))
+- E2e test ([dcd720f](https://github.com/Satoshi-Engineering/volt-vault/commit/dcd720f))
+
+### 💅 Refactors
+
+- Remove deprecated query-routes-for-pay-req route ([7711920](https://github.com/Satoshi-Engineering/volt-vault/commit/7711920))
+- Change playwright test to run with npx playwright ([e0f47a7](https://github.com/Satoshi-Engineering/volt-vault/commit/e0f47a7))
+- Compact schema testing ([8a47b7f](https://github.com/Satoshi-Engineering/volt-vault/commit/8a47b7f))
+- Add createError to assert ([f94ebdd](https://github.com/Satoshi-Engineering/volt-vault/commit/f94ebdd))
+
+### 📖 Documentation
+
+- **readme:** Updated features and roadmap ([0799887](https://github.com/Satoshi-Engineering/volt-vault/commit/0799887))
+- **dev:** Add hints when lnd nodes are not starting up ([f1f32bc](https://github.com/Satoshi-Engineering/volt-vault/commit/f1f32bc))
+- Add example how to start unit test with watch ([c6a3b8f](https://github.com/Satoshi-Engineering/volt-vault/commit/c6a3b8f))
+
+### 📦 Build
+
+- **deps:** Bump koa from 2.15.3 to 2.15.4 ([7f04f86](https://github.com/Satoshi-Engineering/volt-vault/commit/7f04f86))
+
+### 🏡 Chore
+
+- Npm audit fix ([f91fe0b](https://github.com/Satoshi-Engineering/volt-vault/commit/f91fe0b))
+- **deveopment:** Add a docker compose project with bitcoin node and 2x lnd nodes ([cf48bb1](https://github.com/Satoshi-Engineering/volt-vault/commit/cf48bb1))
+- **docs:** Add a script to connect lnd nodes, open a channel and rebalance it ([90ca1d1](https://github.com/Satoshi-Engineering/volt-vault/commit/90ca1d1))
+- **docs:** Update development ([345c467](https://github.com/Satoshi-Engineering/volt-vault/commit/345c467))
+- **docs:** Add guide to update proto & restructure development docs ([f615dbc](https://github.com/Satoshi-Engineering/volt-vault/commit/f615dbc))
+- Add vscode tailwind settings ([49328f2](https://github.com/Satoshi-Engineering/volt-vault/commit/49328f2))
+- Update footer design ([627aa4e](https://github.com/Satoshi-Engineering/volt-vault/commit/627aa4e))
+- Update to nuxtui 3.0.0 ([137983d](https://github.com/Satoshi-Engineering/volt-vault/commit/137983d))
+- Add preliminary favicon ([d8724c6](https://github.com/Satoshi-Engineering/volt-vault/commit/d8724c6))
+- Remove consoe.info ([989ca7c](https://github.com/Satoshi-Engineering/volt-vault/commit/989ca7c))
+- **ErrorLoggingPlugin:** Add scope to warning message ([b21c7b0](https://github.com/Satoshi-Engineering/volt-vault/commit/b21c7b0))
+- Add vitest ([595d9b1](https://github.com/Satoshi-Engineering/volt-vault/commit/595d9b1))
+- Npm audit fix ([2270bc9](https://github.com/Satoshi-Engineering/volt-vault/commit/2270bc9))
+- Add playwright test for index page ([3d1b65e](https://github.com/Satoshi-Engineering/volt-vault/commit/3d1b65e))
+- **nuxt:** Ignore playwright folders from hot reload ([677dc51](https://github.com/Satoshi-Engineering/volt-vault/commit/677dc51))
+- Add e2e test for get-info api ([c71d143](https://github.com/Satoshi-Engineering/volt-vault/commit/c71d143))
+- Add e2e test for query-routes api ([0ff1d85](https://github.com/Satoshi-Engineering/volt-vault/commit/0ff1d85))
+- Exclude e2e tests from nuxt test ([f224412](https://github.com/Satoshi-Engineering/volt-vault/commit/f224412))
+- Remove console.log from test ([b88e47f](https://github.com/Satoshi-Engineering/volt-vault/commit/b88e47f))
+- Configure unit and e2e tests for pipeline ([bc82ae0](https://github.com/Satoshi-Engineering/volt-vault/commit/bc82ae0))
+- Add listchannel info to script ([0ad0517](https://github.com/Satoshi-Engineering/volt-vault/commit/0ad0517))
+- Add validation error test ([3a45855](https://github.com/Satoshi-Engineering/volt-vault/commit/3a45855))
+- **e2e:** Add lnd commands to start and stop the lnd node ([44cfc78](https://github.com/Satoshi-Engineering/volt-vault/commit/44cfc78))
+- **grpcclient:** Add error wrapper for custom error handling ([defc0d4](https://github.com/Satoshi-Engineering/volt-vault/commit/defc0d4))
+- **e2e:** Add test for connection and connection loss of lnd ([608862f](https://github.com/Satoshi-Engineering/volt-vault/commit/608862f))
+- **e2e:** Add failing query routes test due wrong network ([df4cf32](https://github.com/Satoshi-Engineering/volt-vault/commit/df4cf32))
+- Npm audit fix ([b56bd96](https://github.com/Satoshi-Engineering/volt-vault/commit/b56bd96))
+- Package updates ([162029b](https://github.com/Satoshi-Engineering/volt-vault/commit/162029b))
+- **Startup:** Add lnd connection test ([5045676](https://github.com/Satoshi-Engineering/volt-vault/commit/5045676))
+
+### 🎨 Styles
+
+- Remove console.info ([5e551fb](https://github.com/Satoshi-Engineering/volt-vault/commit/5e551fb))
+- Remove function wide try catch ([912cf2e](https://github.com/Satoshi-Engineering/volt-vault/commit/912cf2e))
+- Remove blank line ([1819984](https://github.com/Satoshi-Engineering/volt-vault/commit/1819984))
+
+### 🤖 CI
+
+- Add unit and e2e testing ([92adcfa](https://github.com/Satoshi-Engineering/volt-vault/commit/92adcfa))
+- Update changelogen ([61fa222](https://github.com/Satoshi-Engineering/volt-vault/commit/61fa222))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+- Thomas Schagerl <tom@satoshiengineering.com>
+
 ## v0.0.6
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.5...v0.0.6)
