@@ -8,6 +8,8 @@ import type { RouteHint__Output } from './types/lnrpc/RouteHint'
 import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
 import { isGrpcServiceError } from './lib/isGrpcServiceError'
+import GprcClientError from './types/EmptyGprcResponseError'
+import EmptyGprcResponseError from './types/EmptyGprcResponseError'
 
 export type QueryRoutesResponse__Input = {
   pub_key: string
@@ -78,38 +80,18 @@ export default class GprcClient {
       grpcMethod((error, response) => {
         if (error) {
           if (isGrpcServiceError(error)) {
-            this.handleGRPCErrorCodes(error, reject)
-            return
+            if (error.code === grpc.status.UNAVAILABLE) {
+              this.destroyClient()
+            }
           }
           reject(error)
           return
         } else if (!response) {
-          reject(createError({
-            statusCode: 502,
-            message: 'GRPCClient: No response from LND Node',
-          }))
+          reject(new EmptyGprcResponseError())
         } else {
           resolve(response)
         }
       })
     })
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private handleGRPCErrorCodes(error: grpc.ServiceError, reject: any): void {
-    if (error.code === grpc.status.UNAVAILABLE) {
-      this.destroyClient()
-      const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'
-      console.error(`${message}\n${error}`)
-      reject(createError({
-        statusCode: 503,
-        message,
-      }))
-    }
-    // Note: missing console.error here on purpose because most of the errors will be GRPC errors (by lnd)
-    reject(createError({
-      statusCode: 502,
-      message: `${error}`,
-    }))
   }
 }
