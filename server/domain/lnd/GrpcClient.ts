@@ -7,6 +7,7 @@ import type { QueryRoutesResponse__Output } from './types/lnrpc/QueryRoutesRespo
 import type { RouteHint__Output } from './types/lnrpc/RouteHint'
 import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
+import { grpcErrorWrapper } from './grpcErrorWrapper'
 
 export type QueryRoutesResponse__Input = {
   pub_key: string
@@ -43,38 +44,14 @@ export default class GprcClient {
   }
 
   async getInfo(): Promise<GetInfoResponse__Output> {
-    return new Promise((resolve, reject) => {
-      this.client.GetInfo({}, (error, response) => {
-        if (error || !response) {
-          reject(error)
-        } else {
-          resolve(response)
-        }
-      })
-    })
+    return grpcErrorWrapper(callback => this.client.GetInfo({}, callback))
   }
 
   async queryRoutes(requestData: QueryRoutesResponse__Input): Promise<QueryRoutesResponse__Output> {
-    return new Promise((resolve, reject) => {
-      this.client.QueryRoutes(requestData, (error, response) => {
-        if (error || !response) {
-          reject(error)
-        } else {
-          resolve(response)
-        }
-      })
-    })
+    return grpcErrorWrapper(callback => this.client.QueryRoutes(requestData, callback))
   }
 
   async decodePaymentRequest(requestData: PaymentRequest__Input): Promise<PaymentRequest__Output> {
-    return new Promise((resolve, reject) => {
-      this.client.DecodePayReq(requestData, (error, response) => {
-        if (error || !response) {
-          reject(error)
-        } else {
-          resolve(response)
-        }
-      })
-    })
+    return grpcErrorWrapper(callback => this.client.DecodePayReq(requestData, callback))
   }
 }
