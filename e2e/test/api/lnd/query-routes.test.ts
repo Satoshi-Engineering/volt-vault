@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import type { Serializable } from 'playwright-core/types/structs'
-import { getLndInvoice } from '~/e2e/lib/getLndInvoice'
+import { getLndInvoice } from '~/e2e/lib/lnd/getLndInvoice'
 
 const SATS_AMOUNT = 2000
 
