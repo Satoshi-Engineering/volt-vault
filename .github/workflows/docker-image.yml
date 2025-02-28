@@ -53,6 +53,7 @@ jobs:
         run: docker compose down          
 
   docker:
+    needs: tests
     if: |
       contains(github.event.head_commit.message, 'RUN_PIPELINE') || 
       github.event_name == 'release'
