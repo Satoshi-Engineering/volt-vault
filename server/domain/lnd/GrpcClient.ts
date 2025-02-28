@@ -86,8 +86,9 @@ export default class GprcClient {
             }))
             return
           }
+          // Note: missing console.error here on purpose because most of the errors will be GRPC errors (by lnd)
           reject(createError({
-            statusCode: 504,
+            statusCode: 502,
             message: `${error}`,
           }))
           return
@@ -95,7 +96,7 @@ export default class GprcClient {
           const message = 'GRPCClient: No response from LND Node'
           console.error(message)
           reject(createError({
-            statusCode: 500,
+            statusCode: 502,
             message,
           }))
         } else {

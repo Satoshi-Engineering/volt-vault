@@ -9,16 +9,21 @@ test.describe('api/lnd/query-routes route', async () => {
   let paymentRequestEncoded: string
 
   test.beforeAll(async () => {
-    /*
     paymentRequestEncoded = await getLndInvoice({
       amount: SATS_AMOUNT,
-    })*/
-    paymentRequestEncoded = FAILING_PAYMENTREQUEST_DUE_UNREACHABLE_NODE
+    })
   })
 
   test('should fail due validation error', async ({ request }) => {
     const queryRoutesResponse = await request.get('/api/lnd/query-routes')
     expect(queryRoutesResponse.status()).toBe(400)
+  })
+
+  test('should fail due wrong network', async ({ request }) => {
+    const queryRoutesResponse = await request.get(`/api/lnd/query-routes?=paymentRequestEncoded=${FAILING_PAYMENTREQUEST_DUE_UNREACHABLE_NODE}`)
+    expect(queryRoutesResponse.status()).toBe(502)
+    const data = await queryRoutesResponse.json()
+    expect(data.message).toBe('Error: 2 UNKNOWN: invoice not for current active network \'regtest\'')
   })
 
   test('Getting fee for payment', async ({ request }) => {
