@@ -18,15 +18,15 @@
     "build-grpc-types": "proto-loader-gen-types --keepCase --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=server/domain/lnd/types static-data/lnd/proto/lightning.proto"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/grpc-js": "^1.12.6",
     "@grpc/proto-loader": "^0.7.13",
     "@nuxt/ui": "^3.0.0-alpha.13",
     "console-hooks": "^1.0.2",
-    "nuxt": "^3.15.3",
+    "nuxt": "^3.15.4",
     "telegram-sender": "^1.0.4",
     "vue": "latest",
     "vue-router": "latest",
-    "zod": "^3.24.1"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.1.0",
