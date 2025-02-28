@@ -7,6 +7,7 @@ import type { QueryRoutesResponse__Output } from './types/lnrpc/QueryRoutesRespo
 import type { RouteHint__Output } from './types/lnrpc/RouteHint'
 import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
+import { isGrpcServiceError } from './lib/isGrpcServiceError'
 
 export type QueryRoutesResponse__Input = {
   pub_key: string
@@ -76,33 +77,39 @@ export default class GprcClient {
     return new Promise((resolve, reject) => {
       grpcMethod((error, response) => {
         if (error) {
-          if (error.message.includes('UNAVAILABLE: No connection established')) {
-            this.destroyClient()
-            const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'
-            console.error(`${message}\n${error}`)
-            reject(createError({
-              statusCode: 503,
-              message,
-            }))
+          if (isGrpcServiceError(error)) {
+            this.handleGRPCErrorCodes(error, reject)
             return
           }
-          // Note: missing console.error here on purpose because most of the errors will be GRPC errors (by lnd)
-          reject(createError({
-            statusCode: 502,
-            message: `${error}`,
-          }))
+          reject(error)
           return
         } else if (!response) {
-          const message = 'GRPCClient: No response from LND Node'
-          console.error(message)
           reject(createError({
             statusCode: 502,
-            message,
+            message: 'GRPCClient: No response from LND Node',
           }))
         } else {
           resolve(response)
         }
       })
     })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private handleGRPCErrorCodes(error: grpc.ServiceError, reject: any): void {
+    if (error.code === grpc.status.UNAVAILABLE) {
+      this.destroyClient()
+      const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'
+      console.error(`${message}\n${error}`)
+      reject(createError({
+        statusCode: 503,
+        message,
+      }))
+    }
+    // Note: missing console.error here on purpose because most of the errors will be GRPC errors (by lnd)
+    reject(createError({
+      statusCode: 502,
+      message: `${error}`,
+    }))
   }
 }
