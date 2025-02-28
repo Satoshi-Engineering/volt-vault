@@ -6,7 +6,7 @@ const execAsync = promisify(exec)
 
 type LndNodeCommand = 'start' | 'stop'
 
-export const executeLndCommand = async (command: LndNodeCommand) => {
+const executeLndCommand = async (command: LndNodeCommand) => {
   if (command === 'start') {
     const { stdout, stderr } = await execAsync('docker start lnd')
     assert(!stderr, `There should be no error starting a lightning node ${stderr}`)
@@ -20,10 +20,16 @@ export const executeLndCommand = async (command: LndNodeCommand) => {
   assert(false, `Unknown command ${command}`)
 }
 
-export const startLndNode = async () => {
-  return executeLndCommand('start')
+const startLndNode = async () => {
+  return await executeLndCommand('start')
 }
 
-export const stopLndNode = async () => {
-  return executeLndCommand('stop')
+const stopLndNode = async () => {
+  return await executeLndCommand('stop')
+}
+
+export default {
+  startLndNode,
+  stopLndNode,
+  executeLndCommand,
 }

@@ -3,14 +3,17 @@ import type { Serializable } from 'playwright-core/types/structs'
 import { getLndInvoice } from '~/e2e/lib/lnd/getLndInvoice'
 
 const SATS_AMOUNT = 2000
+const FAILING_PAYMENTREQUEST_DUE_UNREACHABLE_NODE = 'lnbc12840n1pnurdjcsp5yvr672rdyute99ywzd9w8mz96c4kp69nnuv2xlmf2syf09xzuaeqpp58w4fudxyt367usmh76wxj0xvcsxdm6gxffp3nqm0q6j9mkcfhd0qhp5uwcvgs5clswpfxhm7nyfjmaeysn6us0yvjdexn9yjkv3k7zjhp2sxq9z0rgqcqpnrzjqvjt5gujufdl7a4t6zcl0e948d0c92jnlhwrgxds2xmvsqwmnc3ywrf67vqqnvsqqqqqqqqqqqqq8pqq2q9qxpqysgqk79u2k9lq76ca6pcq3wdq4d37047vqhazcdnd56xag0523a0d6zycysnq9j9plvy9l3azl5uf35f0kd0jz2ycwf3l7u74v4ej06g9cgq0jgf2l'
 
 test.describe('api/lnd/query-routes route', async () => {
   let paymentRequestEncoded: string
 
   test.beforeAll(async () => {
+    /*
     paymentRequestEncoded = await getLndInvoice({
       amount: SATS_AMOUNT,
-    })
+    })*/
+    paymentRequestEncoded = FAILING_PAYMENTREQUEST_DUE_UNREACHABLE_NODE
   })
 
   test('should fail due validation error', async ({ request }) => {

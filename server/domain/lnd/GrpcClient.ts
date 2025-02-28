@@ -7,7 +7,6 @@ import type { QueryRoutesResponse__Output } from './types/lnrpc/QueryRoutesRespo
 import type { RouteHint__Output } from './types/lnrpc/RouteHint'
 import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
-import { grpcErrorWrapper } from './grpcErrorWrapper'
 
 export type QueryRoutesResponse__Input = {
   pub_key: string
@@ -20,16 +19,16 @@ export type PaymentRequest__Input = {
 }
 
 export default class GprcClient {
-  client: LightningClient
+  client_: LightningClient | null = null
+  credentials: grpc.ChannelCredentials
+  server: string
 
   constructor(params: {
     server: string,
     lndCert: Buffer,
     macaroon: string,
   }) {
-    const packageDefinition = getPackageDefinition()
-    const lnrpcDescriptor = grpc.loadPackageDefinition(packageDefinition) as unknown as ProtoGrpcType
-    const lnrpc = lnrpcDescriptor.lnrpc
+    this.server = params.server
 
     const metadata = new grpc.Metadata()
     metadata.add('macaroon', params.macaroon)
@@ -38,20 +37,71 @@ export default class GprcClient {
     })
 
     const sslCreds = grpc.credentials.createSsl(params.lndCert)
-    const credentials = grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds)
-
-    this.client = new lnrpc.Lightning(params.server, credentials)
+    this.credentials = grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds)
   }
 
   async getInfo(): Promise<GetInfoResponse__Output> {
-    return grpcErrorWrapper(callback => this.client.GetInfo({}, callback))
+    return this.grpcWrapper(callback => this.client.GetInfo({}, callback))
   }
 
   async queryRoutes(requestData: QueryRoutesResponse__Input): Promise<QueryRoutesResponse__Output> {
-    return grpcErrorWrapper(callback => this.client.QueryRoutes(requestData, callback))
+    return this.grpcWrapper(callback => this.client.QueryRoutes(requestData, callback))
   }
 
   async decodePaymentRequest(requestData: PaymentRequest__Input): Promise<PaymentRequest__Output> {
-    return grpcErrorWrapper(callback => this.client.DecodePayReq(requestData, callback))
+    return this.grpcWrapper(callback => this.client.DecodePayReq(requestData, callback))
+  }
+
+  private createClient(): LightningClient {
+    const packageDefinition = getPackageDefinition()
+    const lnrpcDescriptor = grpc.loadPackageDefinition(packageDefinition) as unknown as ProtoGrpcType
+    const lnrpc = lnrpcDescriptor.lnrpc
+
+    return new lnrpc.Lightning(this.server, this.credentials)
+  }
+
+  private get client(): LightningClient {
+    if (!this.client_) {
+      this.client_ = this.createClient()
+    }
+    return this.client_
+  }
+
+  private destroyClient(): void {
+    this.client_ = null
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private grpcWrapper = <T>(grpcMethod: (callback: (error: any, response: T | undefined) => void) => void): Promise<T> => {
+    return new Promise((resolve, reject) => {
+      grpcMethod((error, response) => {
+        if (error) {
+          if (error.message.includes('UNAVAILABLE: No connection established')) {
+            this.destroyClient()
+            const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'
+            console.error(`${message}\n${error}`)
+            reject(createError({
+              statusCode: 503,
+              message,
+            }))
+            return
+          }
+          reject(createError({
+            statusCode: 504,
+            message: `${error}`,
+          }))
+          return
+        } else if (!response) {
+          const message = 'GRPCClient: No response from LND Node'
+          console.error(message)
+          reject(createError({
+            statusCode: 500,
+            message,
+          }))
+        } else {
+          resolve(response)
+        }
+      })
+    })
   }
 }
