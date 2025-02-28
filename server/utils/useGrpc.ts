@@ -5,7 +5,7 @@ import GprcClient from '../domain/lnd/GrpcClient'
 let cachedGrpcClient: GprcClient | null = null
 
 export default (): GprcClient => {
-  assert(cachedGrpcClient != null, 'GprcClient not initialized')
+  assert(cachedGrpcClient != null, createError('GprcClient not initialized'))
   return cachedGrpcClient
 }
 
@@ -14,6 +14,6 @@ export const initGrpcClient = (params: {
   lndCert: Buffer,
   macaroon: string,
 }) => {
-  assert(cachedGrpcClient == null, 'GprcClient already initialized')
+  assert(cachedGrpcClient == null, createError('GprcClient already initialized'))
   cachedGrpcClient = new GprcClient(params)
 }
