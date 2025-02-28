@@ -1,6 +1,7 @@
 import type { EventHandler, EventHandlerRequest } from 'h3'
+import type { ServiceError } from '@grpc/grpc-js'
+import { status } from '@grpc/grpc-js'
 import { isGrpcServiceError } from '../domain/lnd/lib/isGrpcServiceError'
-import { ServiceError, status } from '@grpc/grpc-js'
 import EmptyGprcResponseError from '../domain/lnd/types/EmptyGprcResponseError'
 
 export const errorMappingEventHandler = <T extends EventHandlerRequest, D> (
@@ -24,7 +25,6 @@ export const errorMappingEventHandler = <T extends EventHandlerRequest, D> (
     }
   })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handleGRPCErrorCodes = (error: ServiceError) => {
   if (error.code === status.UNAVAILABLE) {
     const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'

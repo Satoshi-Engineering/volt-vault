@@ -8,7 +8,6 @@ import type { RouteHint__Output } from './types/lnrpc/RouteHint'
 import type { ProtoGrpcType } from './types/lightning'
 import getPackageDefinition from './getPackageDefinition'
 import { isGrpcServiceError } from './lib/isGrpcServiceError'
-import GprcClientError from './types/EmptyGprcResponseError'
 import EmptyGprcResponseError from './types/EmptyGprcResponseError'
 
 export type QueryRoutesResponse__Input = {
