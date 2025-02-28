@@ -11,6 +11,5 @@ export const getLndInvoice = async ({
   const { stdout, stderr } = await execAsync(`docker exec lnd_other_node lncli --network=regtest addinvoice --amt ${amount}`)
   assert(!stderr, `There should be no error creating a lightning invoice ${stderr}`)
   const paymentRequest = JSON.parse(stdout).payment_request
-
   return paymentRequest
 }
