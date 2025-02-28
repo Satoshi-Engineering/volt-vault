@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.7...v0.0.8)
+
+### 💅 Refactors
+
+- **GRPCClient:** Move error mapping to status codes to errorMappingEventHandler ([448c838](https://github.com/Satoshi-Engineering/volt-vault/commit/448c838))
+
+### 🏡 Chore
+
+- **GRPCClient:** Identify error via grpc error codes ([abd2cd0](https://github.com/Satoshi-Engineering/volt-vault/commit/abd2cd0))
+
+### 🎨 Styles
+
+- Eslint fix ([81d8032](https://github.com/Satoshi-Engineering/volt-vault/commit/81d8032))
+
+### 🤖 CI
+
+- Publish release on github release event ([8dbcfce](https://github.com/Satoshi-Engineering/volt-vault/commit/8dbcfce))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.7
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.6...v0.0.7)
