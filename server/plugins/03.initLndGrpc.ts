@@ -20,4 +20,17 @@ export default defineNitroPlugin(() => {
     lndCert,
     macaroon,
   })
+
+  setImmediate(testConnection)
 })
+
+const testConnection = async () => {
+  consola.info('Testing LND gRPC Client Connection')
+
+  const grpcClient = useGrpc()
+  try {
+    await grpcClient.getInfo()
+  } catch (error) {
+    throw new Error(`gRPC Client has no client connection!\n${error}`)
+  }
+}
