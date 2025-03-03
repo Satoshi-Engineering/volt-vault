@@ -26,7 +26,7 @@ Currently working with proto of `LND v0.18.5-beta`.
 ## Roadmap
 
 - Channel Checker
-- Move Funds to Hardware Wallet as "Order"
+- Accounting Layer
 
 ## Development
 
