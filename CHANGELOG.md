@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v0.0.9
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.8...v0.0.9)
+
+### 💅 Refactors
+
+- Move error to response code mapping from errorMappingEventHandler to defineNitroErrorHandler ([7c94872](https://github.com/Satoshi-Engineering/volt-vault/commit/7c94872))
+
+### 📖 Documentation
+
+- Update roadmap ([4ad3997](https://github.com/Satoshi-Engineering/volt-vault/commit/4ad3997))
+- Add licence ([aa19870](https://github.com/Satoshi-Engineering/volt-vault/commit/aa19870))
+
+### 🏡 Chore
+
+- Npm i ([b6f954b](https://github.com/Satoshi-Engineering/volt-vault/commit/b6f954b))
+- **nuxt/ui:** Update to 3.0.0-beta.2 ([f01eda6](https://github.com/Satoshi-Engineering/volt-vault/commit/f01eda6))
+- Audit fix Refs: projects#1528 ([#1528](https://github.com/Satoshi-Engineering/volt-vault/issues/1528))
+
+### 🤖 CI
+
+- Wait with build & publish job on tests ([1a69b26](https://github.com/Satoshi-Engineering/volt-vault/commit/1a69b26))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.8
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.7...v0.0.8)
