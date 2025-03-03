@@ -20,7 +20,7 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.12.6",
     "@grpc/proto-loader": "^0.7.13",
-    "@nuxt/ui": "^3.0.0-alpha.13",
+    "@nuxt/ui": "^3.0.0-alpha.2",
     "console-hooks": "^1.0.2",
     "nuxt": "^3.15.4",
     "telegram-sender": "^1.0.4",
