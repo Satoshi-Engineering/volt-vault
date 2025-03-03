@@ -27,4 +27,7 @@ export default defineNuxtConfig({
     configFile: 'config.json',
   },
   compatibilityDate: '2024-11-01',
+  nitro: {
+    errorHandler: '~/errorHandler',
+  },
 })

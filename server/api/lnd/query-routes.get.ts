@@ -1,11 +1,10 @@
 import { z } from 'zod'
-import { errorMappingEventHandler } from '~/server/utils/errorMappingEventHandler'
 
 const InputSchema = z.object({
   paymentRequestEncoded: z.string().describe('Payment request string'),
 })
 
-export default errorMappingEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const { paymentRequestEncoded } = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
 
