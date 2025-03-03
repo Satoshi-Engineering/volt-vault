@@ -8,32 +8,51 @@ import EmptyGprcResponseError from './domain/lnd/types/EmptyGprcResponseError'
 const ERROR_PREFIX = '[NitroErrorHandler]'
 
 export default defineNitroErrorHandler((error, event) => {
-  setResponseHeader(event, 'content-type', 'application/json')
-  setResponseStatus(event, 500)
+  setResponseHeader(event, 'Content-Type', 'application/json')
 
   //  It should always be a H3Error, but if not send a error and generic 500 response
   if (!(error instanceof H3Error)) {
-    console.error(`${ERROR_PREFIX} Error`, error)
+    logError('Unexpected Error', error)
     return sendGenericErrorResponse(event)
   }
 
-  // H3Error Response (createError)
+  // Handle H3Error without a cause (createError)
   if (error.cause == undefined) {
-    return sendErrorResponse(event, error)
+    return sendErrorResponse({
+      event,
+      statusCode: error.statusCode,
+      data: error,
+    })
   }
 
-  // Validation Error from getValidatedQuery or readValidatedBody
+  // Handle validation Errors (getValidatedQuery and readValidatedBody via Zod.parse)
   if (error.data instanceof ZodError) {
-    setResponseStatus(event, error.statusCode)
-    return send(event, JSON.stringify(error))
+    return sendErrorResponse({
+      event,
+      statusCode: error.statusCode,
+      data: error,
+    })
   }
 
-  // throw new Error
+  // Handle Errors
   const causingError = error.cause
+
+  // Handle thrown Errors that are instances of ZodError
+  if (causingError instanceof ZodError) {
+    return sendErrorResponse({
+      event,
+      statusCode: 500,
+      data: causingError,
+    })
+  }
 
   if (isGrpcServiceError(causingError)) {
     const h3Error = transformGRPCErrorCodes(causingError)
-    return sendErrorResponse(event, h3Error)
+    return sendErrorResponse({
+      event,
+      statusCode: h3Error.statusCode,
+      data: h3Error,
+    })
   }
 
   if (causingError instanceof EmptyGprcResponseError) {
@@ -41,14 +60,36 @@ export default defineNitroErrorHandler((error, event) => {
       statusCode: 502,
       message: 'GRPCClient: No response from LND Node',
     })
-    return sendErrorResponse(event, h3Error)
+    return sendErrorResponse({
+      event,
+      statusCode: h3Error.statusCode,
+      data: h3Error,
+    })
   }
 
-  // Error was not handled. Send generic 500 response via API and log error in console for telegram sender
-  console.error(`${ERROR_PREFIX} H3Error`, error)
-  console.error(`${ERROR_PREFIX} H3Error.cause`, error.cause)
+  // Error was not handled. Send generic 500 response via API and log error in console.
+  // Console Hooks & TelegramSender will pick it up.
+  logError('Unhandled Exception', error)
+  logError('H3Error.cause', error.cause)
   return sendGenericErrorResponse(event)
 })
+
+const sendGenericErrorResponse = (event: H3Event) => {
+  return sendErrorResponse({
+    event,
+    statusCode: 500,
+    data: { statusCode: 500, message: 'Internal Server Error' },
+  })
+}
+
+const sendErrorResponse = ({ event, statusCode, data }: { event: H3Event, statusCode: number, data: object }) => {
+  setResponseStatus(event, statusCode)
+  return send(event, JSON.stringify(data))
+}
+
+const logError = (context: string, error: unknown) => {
+  console.error(`${ERROR_PREFIX} ${context}`, error)
+}
 
 const transformGRPCErrorCodes = (error: ServiceError) => {
   if (error.code === status.UNAVAILABLE) {
@@ -66,15 +107,3 @@ const transformGRPCErrorCodes = (error: ServiceError) => {
     message: `${error}`,
   })
 }
-
-const sendGenericErrorResponse = (event: H3Event) => {
-  setResponseStatus(event, 500)
-  return send(event, JSON.stringify({ statusCode: 500, message: 'Internal Server Error' }))
-}
-
-const sendErrorResponse = (event: H3Event, error: H3Error) => {
-  setResponseStatus(event, error.statusCode)
-  return send(event, h3Error2JsonString(error))
-}
-
-const h3Error2JsonString = (error: H3Error) => (JSON.stringify(error))
