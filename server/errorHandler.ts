@@ -1,26 +1,40 @@
-import { type H3Event, H3Error } from 'h3'
+import type { H3Event } from 'h3'
+import { ZodError } from 'zod'
 import type { ServiceError } from '@grpc/grpc-js'
 import { status } from '@grpc/grpc-js'
-import { ZodError } from 'zod'
 import { isGrpcServiceError } from './domain/lnd/lib/isGrpcServiceError'
-import EmptyGprcResponseError from './domain/lnd/types/EmptyGprcResponseError'
 
 const ERROR_PREFIX = '[NitroErrorHandler]'
 
 export default defineNitroErrorHandler((error, event) => {
-  setResponseHeader(event, 'Content-Type', 'application/json')
+  const isSensitive = error.unhandled || error.fatal
+  const statusCode = error.statusCode || 500
+  const statusMessage = error.statusMessage || 'internal server error'
 
-  //  It should always be a H3Error, but if not send a error and generic 500 response
-  if (!(error instanceof H3Error)) {
-    logError('Unexpected Error', error)
-    return sendGenericErrorResponse(event)
+  // From the original event handler https://github.com/nitrojs/nitro/blob/v2.11.1/src/runtime/internal/error/prod.ts
+  const url = getRequestURL(event, { xForwardedHost: true, xForwardedProto: true })
+  if (statusCode === 404) {
+    const baseURL = (import.meta as { baseURL?: string }).baseURL || '/'
+    if (/^\/[^/]/.test(baseURL) && !url.pathname.startsWith(baseURL)) {
+      return sendRedirect(
+        event,
+        `${baseURL}${url.pathname.slice(1)}${url.search}`,
+      )
+    }
   }
 
-  // Handle H3Error without a cause (createError)
+  setResponseHeader(event, 'Content-Type', 'application/json')
+  setResponseStatus(event, statusCode, statusMessage)
+
+  // From the original event handler https://github.com/nitrojs/nitro/blob/v2.11.1/src/runtime/internal/error/prod.ts
+  if (statusCode === 404 || !getResponseHeader(event, 'cache-control')) {
+    setResponseHeader(event, 'cache-control', 'no-cache')
+  }
+
+  // Handle H3Error without a cause
   if (error.cause == undefined) {
     return sendErrorResponse({
       event,
-      statusCode: error.statusCode,
       data: error,
     })
   }
@@ -29,7 +43,6 @@ export default defineNitroErrorHandler((error, event) => {
   if (error.data instanceof ZodError) {
     return sendErrorResponse({
       event,
-      statusCode: error.statusCode,
       data: error,
     })
   }
@@ -39,31 +52,26 @@ export default defineNitroErrorHandler((error, event) => {
 
   // Handle thrown Errors that are instances of ZodError
   if (causingError instanceof ZodError) {
-    return sendErrorResponse({
-      event,
-      statusCode: 500,
-      data: causingError,
-    })
+    logError('ZodError', error)
+    return sendGenericErrorResponse(event)
   }
 
   if (isGrpcServiceError(causingError)) {
     const h3Error = transformGRPCErrorCodes(causingError)
+    setResponseStatus(event, h3Error.statusCode, h3Error.statusMessage)
     return sendErrorResponse({
       event,
-      statusCode: h3Error.statusCode,
       data: h3Error,
     })
   }
 
-  if (causingError instanceof EmptyGprcResponseError) {
-    const h3Error = createError({
-      statusCode: 502,
-      message: 'GRPCClient: No response from LND Node',
-    })
+  if (!isSensitive) {
     return sendErrorResponse({
       event,
-      statusCode: h3Error.statusCode,
-      data: h3Error,
+      data: {
+        ...error.toJSON(),
+        statusMessage: statusCode === 404 ? statusMessage : '',
+      },
     })
   }
 
@@ -77,18 +85,16 @@ export default defineNitroErrorHandler((error, event) => {
 const sendGenericErrorResponse = (event: H3Event) => {
   return sendErrorResponse({
     event,
-    statusCode: 500,
-    data: { statusCode: 500, message: 'Internal Server Error' },
+    data: {
+      statusCode: 500,
+      message: 'internal server error',
+      statusMessage: '',
+    },
   })
 }
 
-const sendErrorResponse = ({ event, statusCode, data }: { event: H3Event, statusCode: number, data: object }) => {
-  setResponseStatus(event, statusCode)
+const sendErrorResponse = ({ event, data }: { event: H3Event, data: object }) => {
   return send(event, JSON.stringify(data))
-}
-
-const logError = (context: string, error: unknown) => {
-  console.error(`${ERROR_PREFIX} ${context}`, error)
 }
 
 const transformGRPCErrorCodes = (error: ServiceError) => {
@@ -106,4 +112,8 @@ const transformGRPCErrorCodes = (error: ServiceError) => {
     statusCode: 502,
     message: `${error}`,
   })
+}
+
+const logError = (context: string, error: unknown) => {
+  console.error(`${ERROR_PREFIX} ${context}`, error)
 }

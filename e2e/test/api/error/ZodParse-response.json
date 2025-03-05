@@ -1,0 +1,7 @@
+{
+  "url": "/api/test/errorMapping?test=throwZodErrorParse",
+  "statusCode": 500,
+  "statusMessage": "",
+  "message": "internal server error",
+  "stack": "<pre></pre>"
+}

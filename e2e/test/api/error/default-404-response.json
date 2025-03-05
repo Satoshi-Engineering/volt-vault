@@ -1,0 +1,10 @@
+{
+  "url": "/api/test/not-there-at-all",
+  "statusCode": 404,
+  "statusMessage": "Page not found: /api/test/not-there-at-all",
+  "message": "Page not found: /api/test/not-there-at-all",
+  "stack": "",
+  "data": {
+    "path": "/api/test/not-there-at-all"
+  }
+}
