@@ -1,3 +1,5 @@
+name: lnd_regtest
+
 services:
   bitcoin_regtest:
     image: boltz/bitcoin-core:28.1
