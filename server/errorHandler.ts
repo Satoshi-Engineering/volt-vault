@@ -26,7 +26,7 @@ export default defineNitroErrorHandler((error, event) => {
 const transformGRPCErrorCodes = (error: ServiceError) => {
   if (error.code === status.UNAVAILABLE) {
     const message = 'GRPCClient: Connection unavailable. Is the lnd node running?'
-    console.error(`${message}\n${error}`)
+    logError(message, error)
     return createError({
       statusCode: 503,
       message,
@@ -34,9 +34,10 @@ const transformGRPCErrorCodes = (error: ServiceError) => {
   }
 
   // Note: No console.error here on purpose, because most of the errors will be GRPC errors (by lnd)
+  const message = typeof error == 'object' ? JSON.stringify(error) : `${error}`
   return createError({
     statusCode: 502,
-    message: `${error}`,
+    message,
   })
 }
 
