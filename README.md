@@ -13,7 +13,7 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
   - `/api/lnd/get-info`: Partial response from [See](https://lightning.engineering/api-docs/api/lnd/lightning/get-info/)
 - QueryRoutes API
   - `/api/lnd/query-routes`
-    - Request: `pub_key` and `amt`
+    - Request: `paymentRequestEncoded`
     - Response: [See](https://lightning.engineering/api-docs/api/lnd/lightning/query-routes/)
 
 ## Infos

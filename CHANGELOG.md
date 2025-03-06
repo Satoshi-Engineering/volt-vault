@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.0
+
+### Features
+
+- API: get infos about the lnd node
+- API: QueryRoutes to query the route for an payment request
 
 ## v0.0.13
 
