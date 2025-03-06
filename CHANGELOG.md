@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.0.12
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.11...v0.0.12)
+
+### 🩹 Fixes
+
+- Add package.json for nuxt build process ([2814178](https://github.com/Satoshi-Engineering/volt-vault/commit/2814178))
+
+### 💅 Refactors
+
+- User default nitro error handler in errorHandler override ([9956240](https://github.com/Satoshi-Engineering/volt-vault/commit/9956240))
+- Move error mapping to default errors ([2e7f2ef](https://github.com/Satoshi-Engineering/volt-vault/commit/2e7f2ef))
+- Rename test to errors ([5009fc7](https://github.com/Satoshi-Engineering/volt-vault/commit/5009fc7))
+
+### 🏡 Chore
+
+- Add e2e test for application errors ([c39282a](https://github.com/Satoshi-Engineering/volt-vault/commit/c39282a))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.11
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.10...v0.0.11)
