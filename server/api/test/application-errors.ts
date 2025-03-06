@@ -1,14 +1,14 @@
 import { Metadata, type ServiceError, status } from '@grpc/grpc-js'
 import EmptyGprcResponseError from '~/server/domain/lnd/types/EmptyGprcResponseError'
 
-class TestServiceError implements Error, ServiceError {
+class TestServiceError extends Error implements ServiceError {
   code: status = status.UNKNOWN
-  details: string = ''
+  details: string = 'TestServiceError.details'
   metadata: Metadata = new Metadata()
-  name: string = ''
-  message: string = 'test'
-  stack?: string | undefined
-  cause?: unknown
+
+  constructor() {
+    super('TestServiceError')
+  }
 }
 
 export default defineEventHandler(async (event) => {

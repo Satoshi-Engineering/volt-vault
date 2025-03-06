@@ -40,10 +40,9 @@ const transformGRPCErrorCodes = (error: ServiceError) => {
   }
 
   // Note: No console.error here on purpose, because most of the errors will be GRPC errors (by lnd)
-  const message = typeof error == 'object' ? JSON.stringify(error) : `${error}`
   return createError({
     statusCode: 502,
-    message,
+    message: `${error}`,
   })
 }
 
