@@ -22,6 +22,10 @@ RUN npm install --production=false
 
 COPY --link . .
 
+
+# TODO: Remove this, its for debugging only
+RUN ls -la /app
+
 RUN npm run build
 RUN npm prune
 
