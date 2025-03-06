@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v0.0.10
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.9...v0.0.10)
+
+### 💅 Refactors
+
+- **nitro:** Clean code errorHandler ([a4c2c4b](https://github.com/Satoshi-Engineering/volt-vault/commit/a4c2c4b))
+- Split app.vue into app, layout and page/index.vue ([b2f6487](https://github.com/Satoshi-Engineering/volt-vault/commit/b2f6487))
+- **nitro:** Reimplement errorHandling incl. e2e tests ([81f5ff8](https://github.com/Satoshi-Engineering/volt-vault/commit/81f5ff8))
+- **server:** Change createError parameter from status to statusCode & add 403 response ([c8993c1](https://github.com/Satoshi-Engineering/volt-vault/commit/c8993c1))
+
+### 🏡 Chore
+
+- Add name to docker compose file/project ([d25127e](https://github.com/Satoshi-Engineering/volt-vault/commit/d25127e))
+- **server:** Add createError with statusCode 403 test ([1435d19](https://github.com/Satoshi-Engineering/volt-vault/commit/1435d19))
+
+### 🤖 CI
+
+- Change npm script name ([6b7624b](https://github.com/Satoshi-Engineering/volt-vault/commit/6b7624b))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.9
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.8...v0.0.9)
