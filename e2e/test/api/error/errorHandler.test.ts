@@ -2,6 +2,7 @@ import { test, expect, type APIResponse } from '@playwright/test'
 import default404ResponseJson from './default-404-response.json' with { type: 'json' }
 import getValidateQuery400ResponseJson from './getValidatedQuery-400-response.json' with { type: 'json' }
 import generic500ReponseJson from './generic-500-response.json' with { type: 'json' }
+import createError403ResponseJson from './createError-403-response.json' with { type: 'json' }
 import createError500ResponseJson from './createError-500-response.json' with { type: 'json' }
 import createError501ResponseJson from './createError-501-response.json' with { type: 'json' }
 import zodParseResponseJson from './ZodParse-response.json' with { type: 'json' }
@@ -14,6 +15,11 @@ test('should return 200', async ({ request }) => {
 test('should return 404 ', async ({ request }) => {
   const response = await request.get('/api/test/not-there-at-all')
   await testBasicResponseAgainstJson(response, default404ResponseJson)
+})
+
+test('should return 403 ', async ({ request }) => {
+  const response = await request.get('/api/test/errorMapping?test=createError403')
+  await testBasicResponseAgainstJson(response, createError403ResponseJson)
 })
 
 test('should return 400 for a ZodError in getValidatedQuery function', async ({ request }) => {
