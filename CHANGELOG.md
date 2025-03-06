@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.13
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.12...v0.0.13)
+
+### 🩹 Fixes
+
+- Remove ServiceError message transform ([20a6593](https://github.com/Satoshi-Engineering/volt-vault/commit/20a6593))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.12
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.11...v0.0.12)
