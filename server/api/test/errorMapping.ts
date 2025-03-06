@@ -10,8 +10,6 @@ const InvalidSchema = z.object({
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
 
-  console.log(query.test)
-
   if (!query || query.test == undefined) {
     return { message: 'success' }
   }
