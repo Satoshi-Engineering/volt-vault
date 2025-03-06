@@ -1,4 +1,5 @@
 import { Metadata, type ServiceError, status } from '@grpc/grpc-js'
+import EmptyGprcResponseError from '~/server/domain/lnd/types/EmptyGprcResponseError'
 
 class TestServiceError implements Error, ServiceError {
   code: status = status.UNKNOWN
@@ -25,6 +26,10 @@ export default defineEventHandler(async (event) => {
     const serviceError = new TestServiceError()
     serviceError.code = status.UNAVAILABLE
     throw serviceError
+  }
+
+  if (query.test === 'EmptyGprcResponseError') {
+    throw new EmptyGprcResponseError()
   }
 
   return { message: 'success' }

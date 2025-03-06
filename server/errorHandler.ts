@@ -2,6 +2,7 @@ import { ZodError } from 'zod'
 import type { ServiceError } from '@grpc/grpc-js'
 import { status } from '@grpc/grpc-js'
 import { isGrpcServiceError } from './domain/lnd/lib/isGrpcServiceError'
+import EmptyGprcResponseError from './domain/lnd/types/EmptyGprcResponseError'
 import nuxtErrorHandler from '~/node_modules/nuxt/dist/core/runtime/nitro/error.js'
 
 const ERROR_PREFIX = '[NitroErrorHandler]'
@@ -12,6 +13,11 @@ export default defineNitroErrorHandler((error, event) => {
   // ZodError: console.error extra information about the error
   if (causingError instanceof ZodError) {
     logError('ZodError', error)
+    return nuxtErrorHandler(error, event)
+  }
+
+  if (causingError instanceof EmptyGprcResponseError) {
+    logError('EmptyGprcResponseError', causingError)
     return nuxtErrorHandler(error, event)
   }
 

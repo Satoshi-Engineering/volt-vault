@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test'
 import testBasicResponseAgainstJson from '../testBasicResponseAgainstJson'
+import generic500ReponseJson from '../generic-500-response.json' with { type: 'json' }
 import default404ResponseJson from './default-404-response.json' with { type: 'json' }
 import getValidateQuery400ResponseJson from './getValidatedQuery-400-response.json' with { type: 'json' }
-import generic500ReponseJson from './generic-500-response.json' with { type: 'json' }
 import createError403ResponseJson from './createError-403-response.json' with { type: 'json' }
 import createError500ResponseJson from './createError-500-response.json' with { type: 'json' }
 import createError501ResponseJson from './createError-501-response.json' with { type: 'json' }
