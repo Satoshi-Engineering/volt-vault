@@ -17,6 +17,7 @@ WORKDIR /app
 FROM base AS build
 
 COPY --link . .
+COPY --link package.json .
 
 # add dev dependencies, otherwise nuxt postinstall hooks will fail
 RUN npm install --production=false
