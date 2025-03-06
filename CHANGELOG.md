@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.11
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.10...v0.0.11)
+
+### 🏡 Chore
+
+- Add debug docker build commandfor failing pipeline build ([cbbf987](https://github.com/Satoshi-Engineering/volt-vault/commit/cbbf987))
+
+### 🤖 CI
+
+- Update docker build file ([572f294](https://github.com/Satoshi-Engineering/volt-vault/commit/572f294))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.10
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v0.0.9...v0.0.10)
