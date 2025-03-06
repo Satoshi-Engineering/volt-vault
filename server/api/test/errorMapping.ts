@@ -22,14 +22,21 @@ export default defineEventHandler(async (event) => {
 
   if (query.test === 'createError500') {
     throw createError({
-      status: 500,
+      statusCode: 500,
       message: 'Custom create error with 500 - message',
+    })
+  }
+
+  if (query.test === 'createError403') {
+    throw createError({
+      statusCode: 403,
+      message: 'Custom create error with 403 - message',
     })
   }
 
   if (query.test === 'createError501') {
     throw createError({
-      status: 501,
+      statusCode: 501,
       message: 'Custom create error with 501 - message',
     })
   }
