@@ -8,7 +8,7 @@ import createError501ResponseJson from './createError-501-response.json' with { 
 import zodParseResponseJson from './ZodParse-response.json' with { type: 'json' }
 
 test('should return 200', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping')
+  const response = await request.get('/api/test/default-errors')
   expect(response.ok()).toBeTruthy()
 })
 
@@ -18,12 +18,12 @@ test('should return 404 ', async ({ request }) => {
 })
 
 test('should return 403 ', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=createError403')
+  const response = await request.get('/api/test/default-errors?test=createError403')
   await testBasicResponseAgainstJson(response, createError403ResponseJson)
 })
 
 test('should return 400 for a ZodError in getValidatedQuery function', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=getValidatedQueryError')
+  const response = await request.get('/api/test/default-errors?test=getValidatedQueryError')
 
   await testBasicResponseAgainstJson(response, getValidateQuery400ResponseJson)
   const json = await response.json()
@@ -31,27 +31,27 @@ test('should return 400 for a ZodError in getValidatedQuery function', async ({ 
 })
 
 test('should return 500 for a createError with status 500', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=createError500')
+  const response = await request.get('/api/test/default-errors?test=createError500')
   await testBasicResponseAgainstJson(response, createError500ResponseJson)
 })
 
 test('should return 501 for a createError with status 501', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=createError501')
+  const response = await request.get('/api/test/default-errors?test=createError501')
   await testBasicResponseAgainstJson(response, createError501ResponseJson)
 })
 
 test('should return 500 for a throw new Error', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=throwNewError')
+  const response = await request.get('/api/test/default-errors?test=throwNewError')
   await testBasicResponseAgainstJson(response, generic500ReponseJson)
 })
 
 test('should return 500 for a throw new CustomError', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=throwNewCustomError')
+  const response = await request.get('/api/test/default-errors?test=throwNewCustomError')
   await testBasicResponseAgainstJson(response, generic500ReponseJson)
 })
 
 test('should return 500 for a Zod.parse Error', async ({ request }) => {
-  const response = await request.get('/api/test/errorMapping?test=throwZodErrorParse')
+  const response = await request.get('/api/test/default-errors?test=throwZodErrorParse')
   await testBasicResponseAgainstJson(response, zodParseResponseJson)
 })
 
