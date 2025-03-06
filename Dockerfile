@@ -1,39 +1,33 @@
 # syntax = docker/dockerfile:1
 
-ARG NODE_VERSION=22.11.0
+# Base Image
+ARG NODE_VERSION=22.14.0
 
 FROM node:${NODE_VERSION}-slim AS base
 
 ARG PORT=3000
 
 ENV NODE_ENV=production
+ENV PORT=${PORT}
 
 WORKDIR /app
 
 # Build
+# This is a separate stage to avoid copying the source code into the final image
 FROM base AS build
-
-#COPY --link package.json package-lock.json . 
-# This isn’t working because the dependencies in package-lock.json are specific to the architecture 
-# of the machine where npm install was run.
-COPY --link package.json .
-
-RUN npm install --production=false
 
 COPY --link . .
 
-
-# TODO: Remove this, its for debugging only
-RUN ls -la /app
-
+# add dev dependencies, otherwise nuxt postinstall hooks will fail
+RUN npm install --production=false
 RUN npm run build
-RUN npm prune
 
 # Run
+# This is the final image that will be used to run the application
 FROM base
 
-ENV PORT=$PORT
-#ENV HOST 0.0.0.0
+ARG VERSION
+ENV NUXT_PUBLIC_VERSION=$VERSION
 
 COPY --from=build /app/.output /app/.output
 COPY package.json /app
@@ -41,4 +35,5 @@ COPY static-data /app/static-data
 # Optional, only needed if you rely on unbundled dependencies
 # COPY --from=build /app/node_modules /app/node_modules
 
+EXPOSE ${PORT}
 CMD [ "node", ".output/server/index.mjs" ]
