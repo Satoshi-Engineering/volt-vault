@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.1
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v1.0.0...v1.0.1)
+
+### 🩹 Fixes
+
+- Remove NUXT_PUBLIC_VERSION env variable from Dockerfile as it would override the runtimeConfig reading from package.json ([99473a2](https://github.com/Satoshi-Engineering/volt-vault/commit/99473a2))
+
+### ❤️ Contributors
+
+- Thomas Schagerl <tom@satoshiengineering.com>
+
 ## v1.0.0
 
 ### Features
