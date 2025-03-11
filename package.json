@@ -23,7 +23,7 @@
     "@nuxt/ui": "^3.0.0-alpha.2",
     "console-hooks": "^1.0.2",
     "nuxt": "^3.15.4",
-    "telegram-sender": "^1.0.4",
+    "telegram-sender": "^1.0.6",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.2"
