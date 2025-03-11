@@ -17,7 +17,6 @@ WORKDIR /app
 FROM base AS build
 
 COPY --link . .
-COPY --link package.json .
 
 # add dev dependencies, otherwise nuxt postinstall hooks will fail
 RUN npm install --production=false
@@ -26,9 +25,6 @@ RUN npm run build
 # Run
 # This is the final image that will be used to run the application
 FROM base
-
-ARG VERSION
-ENV NUXT_PUBLIC_VERSION=$VERSION
 
 COPY --from=build /app/.output /app/.output
 COPY package.json /app
