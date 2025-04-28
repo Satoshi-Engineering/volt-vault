@@ -4,7 +4,7 @@ const InputSchema = z.object({
   paymentRequestEncoded: z.string().describe('Payment request string'),
 })
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandlerWithErrorCodes(async (event) => {
   const { paymentRequestEncoded } = await getValidatedQuery(event, InputSchema.parse)
   const grpcClient = useGrpc()
 
