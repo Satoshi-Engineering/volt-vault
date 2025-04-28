@@ -7,7 +7,7 @@ const InvalidSchema = z.object({
   foo: z.string(),
 })
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandlerWithErrorCodes(async (event) => {
   const query = getQuery(event)
 
   if (!query || query.test == undefined) {
@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 500,
       message: 'Custom create error with 500 - message',
+      statusMessage: 'Internal Server Error',
     })
   }
 
@@ -29,6 +30,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 403,
       message: 'Custom create error with 403 - message',
+      statusMessage: 'Bad Request',
     })
   }
 
@@ -36,6 +38,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 501,
       message: 'Custom create error with 501 - message',
+      statusMessage: 'Not Implemented',
     })
   }
 
@@ -44,7 +47,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (query.test === 'throwNewCustomError') {
-    throw new CustomError('This is an error')
+    throw new CustomError('')
   }
 
   if (query.test === 'throwZodErrorParse') {

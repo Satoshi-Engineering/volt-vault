@@ -1,7 +1,7 @@
 {
   "url": "/api/test/application-errors?test=ServiceErrorStatusUNKNOWN",
   "statusCode": 502,
-  "statusMessage": "",
+  "statusMessage": "Server Error",
   "message": "Error: TestServiceError",
   "stack": "<pre><span class=\"stack internal\">at createError (./node_modules/h3/dist/index.mjs:71:15)</span>\n<span class=\"stack\">at transformGRPCErrorCodes (./server/errorHandler.ts:37:1)</span>\n<span class=\"stack\">at <anonymous> (./server/errorHandler.ts:19:1)</span>\n<span class=\"stack internal\">at Object.onError (./node_modules/nitropack/dist/runtime/internal/app.mjs:46:14)</span>\n<span class=\"stack internal\">at Server.toNodeHandle (./node_modules/h3/dist/index.mjs:2309:27)</span>\n<span class=\"stack internal\">at process.processTicksAndRejections (node:internal/process/task_queues:105:5)</span></pre>"
 }

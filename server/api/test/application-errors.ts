@@ -11,7 +11,7 @@ class TestServiceError extends Error implements ServiceError {
   }
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandlerWithErrorCodes(async (event) => {
   const query = getQuery(event)
 
   if (!query || query.test == undefined) {
