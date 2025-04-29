@@ -8,7 +8,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "if [ \"$DISABLE_POSTINSTALL\" != \"true\" ]; then nuxt prepare; fi",
     "lint": "eslint . --max-warnings=0",
     "test": "npm run test:units && npm run test:e2e",
     "test:units": "nuxt test",
