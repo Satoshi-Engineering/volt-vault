@@ -32,7 +32,8 @@ jobs:
         run: |
           npm install @oxc-parser/binding-linux-x64-gnu
           npm install @rollup/rollup-linux-x64-gnu
-          npm install @lightningcss/binding-linux-x64-gnu
+          npm install --force lightningcss
+          npm rebuild
 
       - name: Postinstall
         run: npm run postinstall
