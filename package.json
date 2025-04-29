@@ -24,7 +24,7 @@
     "@nuxt/ui": "^3.1.0",
     "better-npm-audit": "^3.11.0",
     "console-hooks": "^1.0.2",
-    "nuxt": "^3.17.0",
+    "nuxt": "^3.17.1",
     "telegram-sender": "^1.0.6",
     "vue": "latest",
     "vue-router": "latest",
