@@ -28,6 +28,9 @@ jobs:
         env:
           DISABLE_POSTINSTALL: true
 
+      - name: Postinstall
+        run: npm run postinstall
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
