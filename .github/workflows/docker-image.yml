@@ -30,8 +30,8 @@ jobs:
 
       - name: Install platform-specific dependencies
         run: |
-          npm install --no-save @oxc-parser/binding-linux-x64-gnu
-          npm install --no-save @rollup/rollup-linux-x64-gnu
+          npm install @oxc-parser/binding-linux-x64-gnu
+          npm install @rollup/rollup-linux-x64-gnu
 
       - name: Postinstall
         run: npm run postinstall
