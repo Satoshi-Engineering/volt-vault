@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
-import executeLndCommand from '~/e2e/lib/lnd/executeLndCommand'
-import { addTimeout } from '~/e2e/lib/timing/addTimeout'
-import { wait } from '~/e2e/lib/timing/wait'
+import executeLndCommand from '../../lib/lnd/executeLndCommand'
+import { addTimeout } from '../../lib/timing/addTimeout'
+import { wait } from '../../lib/timing/wait'
 
 test.describe('LND Connection', async () => {
   test.afterEach(async () => {
