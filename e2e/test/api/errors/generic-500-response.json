@@ -1,7 +1,5 @@
 {
-  "url": "/api/test/errorMapping?test=throwNewError",
+  "url": "/api/test/application-errors?test=EmptyGprcResponseError",
   "statusCode": 500,
-  "statusMessage": "Server Error",
-  "message": "",
-  "stack": "<pre></pre>"
+  "statusMessage": "Server Error"
 }

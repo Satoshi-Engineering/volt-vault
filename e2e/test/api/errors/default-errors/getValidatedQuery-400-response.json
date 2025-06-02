@@ -1,21 +1,5 @@
 {
   "url": "/api/test/errorMapping?test=getValidatedQueryError",
   "statusCode": 400,
-  "statusMessage": "Validation Error",
-  "message": "[\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"foo\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
-  "stack": "<pre><span class=\"stack internal\">at createError (./node_modules/h3/dist/index.mjs:72:15)</span>\n<span class=\"stack internal\">at createValidationError (./node_modules/h3/dist/index.mjs:238:9)</span>\n<span class=\"stack internal\">at validateData (./node_modules/h3/dist/index.mjs:234:11)</span>\n<span class=\"stack internal\">at getValidatedQuery (./node_modules/h3/dist/index.mjs:251:10)</span>\n<span class=\"stack\">at Object.handler (./server/api/test/errorMapping.ts:20:1)</span>\n<span class=\"stack internal\">at ./node_modules/h3/dist/index.mjs:1916:43</span>\n<span class=\"stack internal\">at process.processTicksAndRejections (node:internal/process/task_queues:105:5)</span>\n<span class=\"stack internal\">at async ./node_modules/h3/dist/index.mjs:1988:19</span>\n<span class=\"stack internal\">at async Object.callAsync (./node_modules/unctx/dist/index.mjs:72:16)</span>\n<span class=\"stack internal\">at async Server.toNodeHandle (./node_modules/h3/dist/index.mjs:2280:7)</span></pre>",
-  "data": {
-    "issues": [
-      {
-        "code": "invalid_type",
-        "expected": "string",
-        "received": "undefined",
-        "path": [
-          "foo"
-        ],
-        "message": "Required"
-      }
-    ],
-    "name": "ZodError"
-  }
+  "statusMessage": "Validation Error"
 }

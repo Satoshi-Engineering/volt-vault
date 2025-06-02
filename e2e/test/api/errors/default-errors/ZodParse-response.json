@@ -1,7 +1,5 @@
 {
   "url": "/api/test/errorMapping?test=throwZodErrorParse",
   "statusCode": 500,
-  "statusMessage": "Server Error",
-  "message": "[\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"foo\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
-  "stack": "<pre></pre>"
+  "statusMessage": "Server Error"
 }

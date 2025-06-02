@@ -1,7 +1,5 @@
 {
   "url": "/api/test/errorMapping?test=throwNewError",
   "statusCode": 500,
-  "statusMessage": "Server Error",
-  "message": "This is an error",
-  "stack": "<pre></pre>"
+  "statusMessage": "Server Error"
 }

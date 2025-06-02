@@ -1,7 +1,5 @@
 {
   "url": "/api/test/errorMapping?test=createError403",
   "statusCode": 403,
-  "statusMessage": "Bad Request",
-  "message": "Custom create error with 403 - message",
-  "stack": "<pre><span class=\"stack internal\">at createError (./node_modules/h3/dist/index.mjs:72:15)</span>\n<span class=\"stack\">at Object.handler (./server/api/test/errorMapping.ts:31:1)</span>\n<span class=\"stack internal\">at Object.handler (./node_modules/h3/dist/index.mjs:1914:24)</span>\n<span class=\"stack internal\">at Object.handler (./node_modules/h3/dist/index.mjs:2227:34)</span>\n<span class=\"stack internal\">at ./node_modules/h3/dist/index.mjs:1988:31</span>\n<span class=\"stack internal\">at process.processTicksAndRejections (node:internal/process/task_queues:105:5)</span>\n<span class=\"stack internal\">at async Object.callAsync (./node_modules/unctx/dist/index.mjs:72:16)</span>\n<span class=\"stack internal\">at async Server.toNodeHandle (./node_modules/h3/dist/index.mjs:2280:7)</span></pre>"
+  "statusMessage": "Bad Request"
 }

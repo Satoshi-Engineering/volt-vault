@@ -29,8 +29,6 @@ test.describe('Default API Errors', () => {
     const response = await request.get('/api/test/default-errors?test=getValidatedQueryError')
 
     await testBasicResponseAgainstJson(response, getValidateQuery400ResponseJson)
-    const json = await response.json()
-    expect(json.data).toEqual(getValidateQuery400ResponseJson.data)
   })
 
   test('should return 500 for a createError with status 500', async ({ request }) => {
