@@ -1,5 +1,41 @@
 # Changelog
 
+## v1.1.0
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v1.0.1...v1.1.0)
+
+### 🚀 Enhancements
+
+- Update error handling to use same mechanic as SatsGate ([6d936e3](https://github.com/Satoshi-Engineering/volt-vault/commit/6d936e3))
+
+### 🩹 Fixes
+
+- Replace npm install --production=false with npm ci ([d62e9d1](https://github.com/Satoshi-Engineering/volt-vault/commit/d62e9d1))
+- Install system dependencies before npm ci ([f80af2b](https://github.com/Satoshi-Engineering/volt-vault/commit/f80af2b))
+- Npm rebuild after ci ([2c30f35](https://github.com/Satoshi-Engineering/volt-vault/commit/2c30f35))
+- Fix node version ([7c2ce98](https://github.com/Satoshi-Engineering/volt-vault/commit/7c2ce98))
+- Change error response jsons from dev format to prod format ([f60aa22](https://github.com/Satoshi-Engineering/volt-vault/commit/f60aa22))
+
+### 💅 Refactors
+
+- Use eventHandlerWithErrorHandling i/o errorHandler and update packages including nuxt to lastest versions ([d59d54f](https://github.com/Satoshi-Engineering/volt-vault/commit/d59d54f))
+
+### 🏡 Chore
+
+- Npm audit fix of telegram-sender / axios ([326ece5](https://github.com/Satoshi-Engineering/volt-vault/commit/326ece5))
+- Upgrade nuxt ([4632ceb](https://github.com/Satoshi-Engineering/volt-vault/commit/4632ceb))
+- Set oxc-parser ot version 0.67.0 ([630a401](https://github.com/Satoshi-Engineering/volt-vault/commit/630a401))
+- Update nuxt to 3.17.4 & oxc-parser to 0.17.0 (newest version) ([cf0dc20](https://github.com/Satoshi-Engineering/volt-vault/commit/cf0dc20))
+
+### ✅ Tests
+
+- Replace ~ imports with relative ones ([2a41a06](https://github.com/Satoshi-Engineering/volt-vault/commit/2a41a06))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+- Dr-erych <dave@satoshiengineering.com>
+
 ## v1.0.1
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v1.0.0...v1.0.1)
