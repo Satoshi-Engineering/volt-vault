@@ -1,6 +1,6 @@
 {
   "name": "volt-vault",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "homepage": "https://github.com/Satoshi-Engineering/volt-vault",
   "scripts": {
