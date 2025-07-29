@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.1.2
+
+[compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v1.1.1...v1.1.2)
+
+### 🏡 Chore
+
+- Update to lnd v0.19.2-beta ([d95ada2](https://github.com/Satoshi-Engineering/volt-vault/commit/d95ada2))
+- Npm audit fix ([8302edc](https://github.com/Satoshi-Engineering/volt-vault/commit/8302edc))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.1.1
 
 [compare changes](https://github.com/Satoshi-Engineering/volt-vault/compare/v1.1.0...v1.1.1)
