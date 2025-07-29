@@ -18,10 +18,10 @@ in the Lightning Network landscape, bridging gaps to enhance functionality and u
 
 ## Infos
 
-Currently working with proto of `LND v0.19.1-beta`.
+Currently working with proto of `LND v0.19.2-beta`.
 
-- [Proto File](https://github.com/lightningnetwork/lnd/blob/v0.19.1-beta/lnrpc/lightning.proto)
-- [Permalink](https://github.com/lightningnetwork/lnd/blob/59a86b3b5475276c1e266c10656d13300dc2b5a1/lnrpc/lightning.proto)
+- [Proto File](https://github.com/lightningnetwork/lnd/blob/v0.19.2-beta/lnrpc/lightning.proto)
+- [Permalink](https://github.com/lightningnetwork/lnd/blob/a839456493037a6af51cbf16db8be6182d614171/lnrpc/lightning.proto)
 
 ## Roadmap
 

@@ -14,7 +14,7 @@ services:
       - ../../data/bitcoin:/root/.bitcoin
 
   lnd:
-    image: lightninglabs/lnd:v0.19.1-beta  # Using specific LND version
+    image: lightninglabs/lnd:v0.19.2-beta  # Using specific LND version
     container_name: lnd
     platform: linux/amd64  # Force x86_64 emulation for ARM systems
     restart: unless-stopped
